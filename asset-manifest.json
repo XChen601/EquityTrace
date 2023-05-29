@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/StockTrace/static/css/main.96ed9d6b.css",
+    "main.js": "/StockTrace/static/js/main.a9cabdf3.js",
+    "index.html": "/StockTrace/index.html",
+    "main.96ed9d6b.css.map": "/StockTrace/static/css/main.96ed9d6b.css.map",
+    "main.a9cabdf3.js.map": "/StockTrace/static/js/main.a9cabdf3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96ed9d6b.css",
+    "static/js/main.a9cabdf3.js"
+  ]
+}
