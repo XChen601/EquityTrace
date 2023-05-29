@@ -1,4 +1,6 @@
-# StockTrace
+# StockTrace 
+[Website Link Here](https://xchen601.github.io/StockTrace/)
+
 This is a web development application built with React, Bootstrap, Firebase, and integrated with the Tradier API and the Alpha Vantage API. The application allows users to search for stocks, favorite stocks, and retrieve information such as stock price and price change.
 
 ## Features
