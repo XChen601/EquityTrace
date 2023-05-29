@@ -23,4 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 src/Firebase.config.js
+Firebase.config.js
+./src/Firebase.config.js
 .env
