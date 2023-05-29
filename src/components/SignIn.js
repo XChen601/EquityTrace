@@ -23,7 +23,7 @@ import {
     getDocs,
   } from 'firebase/firestore';
 
-import { getUserName } from "../Firebase";
+import { getUserName, getProfilePicUrl } from "../Firebase";
 
 export default function SignIn({setFavorites}) {
     const [user, setUser] = useState(null)
@@ -72,12 +72,16 @@ export default function SignIn({setFavorites}) {
         <div className="sign-in">
             {user ? (
                 <>
-                    <div>{getUserName()}</div>
-                    <button onClick={handleSignOut}>Sign Out</button>
+                    <div className="user-info">
+                        <img src={getProfilePicUrl()} />
+                        <div>{getUserName()}</div>
+                    </div>
+                    
+                    <button onClick={handleSignOut}>SIGN OUT</button>
                 </>
                 
             ) : (
-                <button onClick={handleSignIn}>Sign In</button>
+                <button onClick={handleSignIn}>SIGN IN</button>
             )}
         </div>
     )

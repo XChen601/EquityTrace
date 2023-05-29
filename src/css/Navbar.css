@@ -2,11 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-
-    background-color: #120458;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    color: #ff00a0;
+    padding: 20px;
+    background-color: var(--accent-color);
+    font-weight: 700;
 }
 
 .sign-in {
@@ -16,7 +14,29 @@
     gap: 0.5rem;
 }
 
-#app-name {
+.navbar-brand {
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.navbar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+.navbar button {
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 10px;
 }

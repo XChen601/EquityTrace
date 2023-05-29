@@ -4,7 +4,7 @@ import '../css/Navbar.css'
 const Navbar = ({setFavorites}) => {
     return (
         <nav className="navbar">
-            <div id="app-name">StockTrace</div>
+            <div className="navbar-brand">StockTrace</div>
             <SignIn setFavorites={setFavorites}/>
         </nav>
     );
