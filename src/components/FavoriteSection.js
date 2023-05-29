@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { deleteFromDatabase, isUserSignedIn, getUserName , getUserFavorites, getFavoriteStockPrice} from '../Firebase';
+import { deleteFromDatabase, isUserSignedIn, getUserName , getUserFavorites, getFavoriteStockPrice, asyncGetUserName} from '../Firebase';
 import '../css/FavoriteSection.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function FavoriteSection({ favorites, setFavorites}) {
-    const [stocksData, setStocksData] = useState([]);
+    const [favoritedStocksData, setFavoritedStocksData] = useState([]);
     
     const handleRemoveFavorite = async (symbol) => {
         deleteFromDatabase(symbol, getUserName());
@@ -18,7 +18,7 @@ export default function FavoriteSection({ favorites, setFavorites}) {
         console.log(favorites)
         async function fetchStocksData() {
             if (favorites.length === 0) {
-                setStocksData([])
+                setFavoritedStocksData([])
                 return
             }
             const tradierToken = process.env.REACT_APP_TRADIER_TOKEN
@@ -38,11 +38,12 @@ export default function FavoriteSection({ favorites, setFavorites}) {
             if (!Array.isArray(stockList)) {
                 stockList = [stockList];
             }
-
-            // for each stock in stockList, get the last price from database
+            
+            // for each stock in stockList, get the last price from database, add more info to each stock in stockList
             for (let i = 0; i < stockList.length; i++) {
                 const stock = stockList[i];
-                const savedPrice = await getFavoriteStockPrice(stock.symbol, getUserName());
+                const userName = await asyncGetUserName();
+                const savedPrice = await getFavoriteStockPrice(stock.symbol, userName);
                 stock.savedPrice = savedPrice;
                 const priceChange = stock.ask - savedPrice;
                 stock.priceChange = priceChange;
@@ -50,7 +51,7 @@ export default function FavoriteSection({ favorites, setFavorites}) {
                 stock.savedPriceChangePercentage = savedPriceChangePercentage.toFixed(2);
             }
 
-            setStocksData(stockList)
+            setFavoritedStocksData(stockList)
             console.log(stockList)
             return stockInfo.quotes.quote
         }
@@ -62,13 +63,13 @@ export default function FavoriteSection({ favorites, setFavorites}) {
             <h2 className='section-title'>Favorited Stocks</h2>
             {!isUserSignedIn() ? (
                 <div>Sign in to save favorites!</div>
-            ): stocksData.length === 0 && 
+            ): favoritedStocksData.length === 0 && 
                 <div>No favorites yet!</div>
             }
             
             <div className='card-section'>
 
-                {stocksData.map(stock => (
+                {favoritedStocksData.map(stock => (
                 <div className='stock-card'>
                     <h4>{stock.symbol}</h4>
                     <div>{stock.description}</div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
     getAuth,
-    onAuthStateChanged,
     GoogleAuthProvider,
     signInWithPopup,
     signOut,
@@ -9,17 +8,8 @@ import {
 import {
     getFirestore,
     collection,
-    addDoc,
     query,
-    orderBy,
-    limit,
-    onSnapshot,
-    setDoc,
-    updateDoc,
-    doc,
     where,
-    getDoc,
-    serverTimestamp,
     getDocs,
   } from 'firebase/firestore';
 

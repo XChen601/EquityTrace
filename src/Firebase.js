@@ -54,6 +54,17 @@ function getProfilePicUrl() {
 function getUserName() {
     return getAuth().currentUser.displayName;
 }
+
+// so on first load of page, getting userName will work
+async function asyncGetUserName() {
+    const user = getAuth().currentUser;
+    if (user !== null) {
+        return user.displayName;
+    }
+    else {
+        return null;
+    }
+}
   
 // Returns true if a user is signed-in.
 function isUserSignedIn() {
@@ -120,4 +131,4 @@ const firebaseAppConfig = getFirebaseConfig();
 initializeApp(firebaseAppConfig);
 
 export {signIn, signOutUser, getProfilePicUrl, getUserName, isUserSignedIn, addToDatabase, deleteFromDatabase,
-    getUserFavorites, getFavoriteStockPrice}
+    getUserFavorites, getFavoriteStockPrice, asyncGetUserName}
