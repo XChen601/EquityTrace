@@ -66,7 +66,7 @@ export default function Search({setFavorites}) {
                 <div className="list-container">
                     <div className="symbol-list">
                     {symbolList && symbolList.map((symbol) => (
-                        <div onClick={onClickHandler} key={symbol}>{symbol}</div>
+                        <div className="symbol-item" onClick={onClickHandler} key={symbol}>{symbol}</div>
                     ))}
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { deleteFromDatabase, isUserSignedIn, getUserName , getUserFavorites} from '../Firebase';
+import { deleteFromDatabase, isUserSignedIn, getUserName , getUserFavorites, getFavoriteStockPrice} from '../Firebase';
 import '../css/FavoriteSection.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -7,11 +7,11 @@ export default function FavoriteSection({ favorites, setFavorites}) {
     const [stocksData, setStocksData] = useState([]);
     
     const handleRemoveFavorite = async (symbol) => {
-
         deleteFromDatabase(symbol, getUserName());
         const userFavoriteList = await getUserFavorites(getUserName());
         setFavorites(userFavoriteList)
     }
+
 
     
     useEffect(() => {
@@ -38,7 +38,20 @@ export default function FavoriteSection({ favorites, setFavorites}) {
             if (!Array.isArray(stockList)) {
                 stockList = [stockList];
             }
+
+            // for each stock in stockList, get the last price from database
+            for (let i = 0; i < stockList.length; i++) {
+                const stock = stockList[i];
+                const savedPrice = await getFavoriteStockPrice(stock.symbol, getUserName());
+                stock.savedPrice = savedPrice;
+                const priceChange = stock.ask - savedPrice;
+                stock.priceChange = priceChange;
+                const savedPriceChangePercentage = (priceChange / savedPrice) * 100;
+                stock.savedPriceChangePercentage = savedPriceChangePercentage.toFixed(2);
+            }
+
             setStocksData(stockList)
+            console.log(stockList)
             return stockInfo.quotes.quote
         }
         fetchStocksData();
@@ -60,8 +73,11 @@ export default function FavoriteSection({ favorites, setFavorites}) {
                     <h4>{stock.symbol}</h4>
                     <div>{stock.description}</div>
                     <br></br>
-                    <div>Price: ${stock.ask}</div>
+                    <div>Current Price: ${stock.ask}</div>
                     <div>Day Change: {stock.change_percentage}%</div>
+                    <br></br>
+                    <div>Performance: {stock.savedPriceChangePercentage}%</div>
+                    
                     <button onClick={() => handleRemoveFavorite(stock.symbol)}>Remove Favorite</button>
                 </div>
                 ))} 

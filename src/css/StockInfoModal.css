@@ -1,0 +1,29 @@
+.modal-content {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.modal-content button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.modal-content .favorite-btn {
+    background-color: var(--accent-color); 
+}
+.modal-content .favorite-btn:hover {
+    background-color: var(--dark-accent-color); 
+}
+
+.modal-content .close-btn {
+    background-color: var(--warning-color); 
+}
+  

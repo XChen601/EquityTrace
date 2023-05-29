@@ -9,13 +9,15 @@ import {
     MDBModalTitle,
     MDBModalBody,
     MDBModalFooter,
-  } from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
+import '../css/StockInfoModal.css'
+
 
 export default function StockInfoModal({ stockName, setFavorites, modalVisibility, toggleShow, setModalVisibility }) {
     const [stockInfo, setStockInfo] = useState({});
 
     async function addToFavorites() {
-        await addToDatabase(stockName, getUserName());
+        await addToDatabase(stockName, stockInfo.ask);
         const userFavoriteList = await getUserFavorites(getUserName());
         setFavorites(userFavoriteList);
     }
@@ -57,8 +59,8 @@ export default function StockInfoModal({ stockName, setFavorites, modalVisibilit
                         </MDBModalBody>
 
                         <MDBModalFooter>
-                        <button onClick={addToFavorites}>Favorite!</button>
-                        <button color='secondary' onClick={toggleShow}>
+                        <button className="favorite-btn" onClick={addToFavorites}>Favorite!</button>
+                        <button className="close-btn" color='secondary' onClick={toggleShow}>
                             Close
                         </button>
                         </MDBModalFooter>

@@ -21,7 +21,7 @@
     padding: 40px 20px;
     margin: 10px;
     gap: 5px;
-    background-color: #303030;
+    background: linear-gradient(180deg, rgba(52,52,52,1) 0%, rgba(68,68,68,1) 100%);
 }
 
 .stock-card button {
@@ -35,6 +35,7 @@
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 15px;
 }
 
 .stock-card button:hover {

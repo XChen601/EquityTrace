@@ -16,6 +16,7 @@ import {
   limit,
   onSnapshot,
   setDoc,
+  getDoc,
   updateDoc,
   deleteDoc,
   where,
@@ -99,8 +100,24 @@ async function getUserFavorites(userName) {
     return querySnapshot.docs.map(doc => doc.data().stockName);
 }
 
+async function getFavoriteStockPrice(stockName, userName) {
+    console.log(stockName, userName)
+    const querySnapshot = await getDocs(query(collection(getFirestore(), 'user-favorites'), 
+    where('name', '==', userName),
+    where('stockName', '==', stockName)));
+
+    if (!querySnapshot.empty) {
+        const doc = querySnapshot.docs[0];
+        const stockPrice = doc.data().stockPrice;
+        console.log('Stock Price:', stockPrice);
+        return stockPrice;
+      } else {
+        console.log('No matching document found.');
+      }
+}
+
 const firebaseAppConfig = getFirebaseConfig();
 initializeApp(firebaseAppConfig);
 
 export {signIn, signOutUser, getProfilePicUrl, getUserName, isUserSignedIn, addToDatabase, deleteFromDatabase,
-    getUserFavorites}
+    getUserFavorites, getFavoriteStockPrice}

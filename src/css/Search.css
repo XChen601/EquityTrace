@@ -13,10 +13,11 @@
     width: 100%;
 }
 
-.symbol-list div {
+
+.symbol-item {
     border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
+    border-left: 1px solid var(--accent-color);
+    border-right: 1px solid var(--accent-color);
     padding: 2px 8px;
     cursor: pointer;
 }
@@ -32,6 +33,10 @@
 .search-section input {
     width: 300px;
     height: 50px;
-    border: solid 1px black;
+    border: solid 2px var(--accent-color);
     padding: 0px 10px;
+}
+
+.symbol-item:hover {
+    font-weight: 600;
 }
