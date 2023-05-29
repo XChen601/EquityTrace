@@ -48,10 +48,12 @@ export default function StockInfoModal({ stockName, setFavorites, modalVisibilit
                         <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
                         </MDBModalHeader>
                         <MDBModalBody>
+                            
                             <h4>Ticker: {stockInfo.symbol}</h4>
+                            <div>{stockInfo.description}</div>
                             <div>Price: {stockInfo.ask}</div>
                             <div>Day Change: {stockInfo.change_percentage}%</div>
-                            <div>Description: {stockInfo.description}</div>
+                            
                         </MDBModalBody>
 
                         <MDBModalFooter>
