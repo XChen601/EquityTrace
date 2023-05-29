@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
 
 
 export default function StockInfoModal({ stockName, setFavorites }) {
     const [stockInfo, setStockInfo] = useState({});
 
-    function addToFavorites() {
-        setFavorites(prevFavorites => [...prevFavorites, stockName])
+    async function addToFavorites() {
+        await addToDatabase(stockName, getUserName());
+        const userFavoriteList = await getUserFavorites(getUserName());
+        setFavorites(userFavoriteList);
     }
 
     useEffect(() => {
