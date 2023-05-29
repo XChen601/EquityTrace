@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
+import {
+    MDBBtn,
+    MDBModal,
+    MDBModalDialog,
+    MDBModalContent,
+    MDBModalHeader,
+    MDBModalTitle,
+    MDBModalBody,
+    MDBModalFooter,
+  } from 'mdb-react-ui-kit';
 
-
-export default function StockInfoModal({ stockName, setFavorites }) {
+export default function StockInfoModal({ stockName, setFavorites, modalVisibility, toggleShow, setModalVisibility }) {
     const [stockInfo, setStockInfo] = useState({});
 
     async function addToFavorites() {
@@ -31,13 +40,29 @@ export default function StockInfoModal({ stockName, setFavorites }) {
     }, [stockName]);
     return (
         <div>
-            <h1>Stock Information:</h1>
-            <h4>Ticker: {stockInfo.symbol}</h4>
-            <div>Price: {stockInfo.ask}</div>
-            <div>Day Change: {stockInfo.change_percentage}%</div>
-            <div>Description: {stockInfo.description}</div>
-            <button onClick={addToFavorites}>Favorite!</button>
-            <button>Close Modal</button>
+            <MDBModal show={modalVisibility} setShow={setModalVisibility} tabIndex='-1'>
+                <MDBModalDialog centered>
+                    <MDBModalContent >
+                        <MDBModalHeader>
+                        <MDBModalTitle>Stock Information:</MDBModalTitle>
+                        <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
+                        </MDBModalHeader>
+                        <MDBModalBody>
+                            <h4>Ticker: {stockInfo.symbol}</h4>
+                            <div>Price: {stockInfo.ask}</div>
+                            <div>Day Change: {stockInfo.change_percentage}%</div>
+                            <div>Description: {stockInfo.description}</div>
+                        </MDBModalBody>
+
+                        <MDBModalFooter>
+                        <button onClick={addToFavorites}>Favorite!</button>
+                        <button color='secondary' onClick={toggleShow}>
+                            Close
+                        </button>
+                        </MDBModalFooter>
+                    </MDBModalContent>
+                </MDBModalDialog>
+            </MDBModal>
         </div>
     )
 

@@ -1,14 +1,24 @@
+.favorited-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
 .card-section {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
 
 .stock-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: solid 1px #333333;
-    margin: 15px;
-    padding: 2% 0px;
-    gap: 10px;
-
+    width: 320px;
+    padding: 40px 20px;
+    margin: 10px;
+    gap: 5px;
 }

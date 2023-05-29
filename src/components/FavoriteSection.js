@@ -46,7 +46,7 @@ export default function FavoriteSection({ favorites, setFavorites}) {
 
     return (
         <div className='favorited-section'>
-            <h2>Favorited Stocks:</h2>
+            <h2 className='section-title'>Favorited Stocks</h2>
             {!isUserSignedIn() ? (
                 <div>Sign in to save favorites!</div>
             ): stocksData.length === 0 && 
@@ -54,15 +54,19 @@ export default function FavoriteSection({ favorites, setFavorites}) {
             }
             
             <div className='card-section'>
-               {stocksData.map(stock => (
-                <div className='stock-card col-2'>
+
+                {stocksData.map(stock => (
+                <div className='stock-card'>
                     <h4>{stock.symbol}</h4>
                     <div>{stock.description}</div>
+                    <br></br>
                     <div>Price: ${stock.ask}</div>
                     <div>Day Change: {stock.change_percentage}%</div>
                     <button onClick={() => handleRemoveFavorite(stock.symbol)}>Remove Favorite</button>
                 </div>
                 ))} 
+
+               
             </div>
             
 

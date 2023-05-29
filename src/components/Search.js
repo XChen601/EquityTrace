@@ -6,11 +6,15 @@ export default function Search({setFavorites}) {
     const [inputValue, setInputValue] = useState('');
     const [symbolList, setSymbolList] = useState([]);
     const [clickedSymbol, setClickedSymbol] = useState('GOOGL');
+    const [modalVisibility, setModalVisibility] = useState(false);
+    
+    const toggleShow = () => setModalVisibility(!modalVisibility);
     
     const onClickHandler = (e) => {
         setClickedSymbol(e.target.innerText)
         setInputValue('')
         setSymbolList([])
+        toggleShow()
     }
 
     const handleInputChange = async (e) => {
@@ -50,6 +54,7 @@ export default function Search({setFavorites}) {
 
 
     return (
+        <>
         <div className="search-section">
             <div className="search-box">
                 <input
@@ -66,11 +71,14 @@ export default function Search({setFavorites}) {
                     </div>
                 </div>
             </div>
-            
-            
-            <StockInfoModal stockName={clickedSymbol} setFavorites={setFavorites}/>
         </div>
-            
+        <StockInfoModal stockName={clickedSymbol} setFavorites={setFavorites}
+            modalVisibility={modalVisibility} 
+            toggleShow={toggleShow}
+            setModalVisibility={setModalVisibility}
+        /> 
+        </>
+        
         
     );
 }
