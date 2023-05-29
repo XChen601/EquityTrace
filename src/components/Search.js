@@ -52,7 +52,7 @@ export default function Search({setFavorites}) {
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
-                placeholder="Enter search text"
+                placeholder="Search for a stock"
             />
             <ul>
             {symbolList && symbolList.map((symbol) => (
