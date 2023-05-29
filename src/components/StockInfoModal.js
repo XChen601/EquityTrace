@@ -22,20 +22,39 @@ export default function StockInfoModal({ stockName, setFavorites, modalVisibilit
         setFavorites(userFavoriteList);
     }
 
+    const setNotFound = () => {
+        setStockInfo({
+            symbol: 'Not Found',
+            description: 'Not Found',
+            ask: 'Not Found',
+            change_percentage: 'Not Found'
+        })
+    }
+
     useEffect(() => {
         async function fetchStockInfo(symbol) {
             const tradierToken = process.env.REACT_APP_TRADIER_TOKEN
-            const response = await fetch(`https://api.tradier.com/v1/markets/quotes?symbols=${symbol}&greeks=false`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${tradierToken}`,
-                    'Accept': 'application/json'
+            try {
+                const response = await fetch(`https://api.tradier.com/v1/markets/quotes?symbols=${symbol}&greeks=false`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${tradierToken}`,
+                        'Accept': 'application/json'
+                    }
+                });
+                console.log(response)
+                const stocksData = await response.json();
+                console.log(stocksData.quotes.quote)
+                if (stocksData.quotes.quote === undefined) {
+                    setNotFound();
+                    return;
                 }
-            })
-            const stocksData = await response.json();
-            console.log(stocksData.quotes.quote)
-            setStockInfo(stocksData.quotes.quote)
-            return stocksData.quotes.quote
+                setStockInfo(stocksData.quotes.quote)
+                return stocksData.quotes.quote
+            } catch (error) {
+                setNotFound();
+            }
+            
         }
         fetchStockInfo(stockName);
 

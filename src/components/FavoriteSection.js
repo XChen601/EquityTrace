@@ -11,8 +11,6 @@ export default function FavoriteSection({ favorites, setFavorites}) {
         const userFavoriteList = await getUserFavorites(getUserName());
         setFavorites(userFavoriteList)
     }
-
-
     
     useEffect(() => {
         console.log(favorites)

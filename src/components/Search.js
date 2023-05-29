@@ -12,6 +12,7 @@ export default function Search({setFavorites}) {
     
     const onClickHandler = (e) => {
         setClickedSymbol(e.target.innerText)
+        
         setInputValue('')
         setSymbolList([])
         toggleShow()
