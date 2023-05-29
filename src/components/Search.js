@@ -29,21 +29,34 @@ export default function Search({setFavorites}) {
         
     };
 
-    async function fetchSymbols(string) {
+    async function fetchSymbols(searchString) {
         const alphaToken = process.env.REACT_APP_ALPHA_TOKEN;
+        // if search string is empty, return empty list
+        if (searchString.length === 0) {
+            return []
+        }
+
+        console.log(searchString)
         try {
-            const response = await fetch(
-                `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${string}&apikey=${alphaToken}`
-            );
+            const tradierToken = process.env.REACT_APP_TRADIER_TOKEN
             
-            const stocksData = await response.json();
-            console.log(stocksData);
-            const matches = stocksData.bestMatches
+            const response = await fetch(`https://api.tradier.com/v1/markets/lookup?q=${searchString}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${tradierToken}`,
+                    'Accept': 'application/json'
+                }
+            })
             
-            if (matches === undefined && string.length !== 0) {
+            const json = await response.json();
+            console.log(json);
+            const stocksData = json.securities.security
+            
+            if (stocksData === undefined && searchString.length !== 0) {
                 return ["RATE LIMITED"]
             }
-            const symbols = matches.map(match => match['1. symbol'])
+            
+            const symbols = stocksData.map(stock => stock['symbol']).slice(0,10)
             console.log(symbols)
 
             return symbols
