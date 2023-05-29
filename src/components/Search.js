@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import StockInfoModal from "./StockInfoModal";
+import '../css/Search.css'
 
 export default function Search({setFavorites}) {
     const [inputValue, setInputValue] = useState('');
@@ -8,6 +9,8 @@ export default function Search({setFavorites}) {
     
     const onClickHandler = (e) => {
         setClickedSymbol(e.target.innerText)
+        setInputValue('')
+        setSymbolList([])
     }
 
     const handleInputChange = async (e) => {
@@ -47,18 +50,24 @@ export default function Search({setFavorites}) {
 
 
     return (
-        <div>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Search for a stock"
-            />
-            <ul>
-            {symbolList && symbolList.map((symbol) => (
-                <div onClick={onClickHandler} key={symbol}>{symbol}</div>
-            ))}
-            </ul>
+        <div className="search-section">
+            <div className="search-box">
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="Search for a stock"
+                />
+                <div className="list-container">
+                    <div className="symbol-list">
+                    {symbolList && symbolList.map((symbol) => (
+                        <div onClick={onClickHandler} key={symbol}>{symbol}</div>
+                    ))}
+                    </div>
+                </div>
+            </div>
+            
+            
             <StockInfoModal stockName={clickedSymbol} setFavorites={setFavorites}/>
         </div>
             

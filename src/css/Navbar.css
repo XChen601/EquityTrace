@@ -1,0 +1,22 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+
+    background-color: #120458;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #ff00a0;
+}
+
+.sign-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#app-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}

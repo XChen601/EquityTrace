@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { deleteFromDatabase, isUserSignedIn, getUserName , getUserFavorites} from '../Firebase';
+import '../css/FavoriteSection.css'
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function FavoriteSection({ favorites, setFavorites}) {
     const [stocksData, setStocksData] = useState([]);
@@ -43,7 +45,7 @@ export default function FavoriteSection({ favorites, setFavorites}) {
     }, [favorites]);
 
     return (
-        <div>
+        <div className='favorited-section'>
             <h2>Favorited Stocks:</h2>
             {!isUserSignedIn() ? (
                 <div>Sign in to save favorites!</div>
@@ -51,15 +53,18 @@ export default function FavoriteSection({ favorites, setFavorites}) {
                 <div>No favorites yet!</div>
             }
             
-            {stocksData.map(stock => (
-                <div>
-                    <h4>Ticker: {stock.symbol}</h4>
-                    <div>Price: {stock.ask}</div>
+            <div className='card-section'>
+               {stocksData.map(stock => (
+                <div className='stock-card col-2'>
+                    <h4>{stock.symbol}</h4>
+                    <div>{stock.description}</div>
+                    <div>Price: ${stock.ask}</div>
                     <div>Day Change: {stock.change_percentage}%</div>
-                    <div>Description: {stock.description}</div>
                     <button onClick={() => handleRemoveFavorite(stock.symbol)}>Remove Favorite</button>
                 </div>
-            ))}
+                ))} 
+            </div>
+            
 
         </div>
     );

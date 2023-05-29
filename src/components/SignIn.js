@@ -69,10 +69,10 @@ export default function SignIn({setFavorites}) {
     };
 
     return (
-        <div>
+        <div className="sign-in">
             {user ? (
                 <>
-                    <p>Hello, {getUserName()}</p>
+                    <div>{getUserName()}</div>
                     <button onClick={handleSignOut}>Sign Out</button>
                 </>
                 
