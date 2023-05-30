@@ -1,5 +1,5 @@
 # StockTrace 
-[Website Link Here](stocktrace-a0664.firebaseapp.com) Deployed with Firebase hosting
+[Website Link Here](https://stocktrace-a0664.firebaseapp.com) Deployed with Firebase hosting
 
 This is a web development application built with React, Bootstrap, Firebase, and integrated with the Tradier API and the Alpha Vantage API. The application allows users to search for stocks, favorite stocks, and retrieve information such as stock price and price change.
 
