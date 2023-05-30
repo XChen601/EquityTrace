@@ -50,8 +50,6 @@ export default function FavoriteSection({ favorites, setFavorites}) {
             }
 
             setFavoritedStocksData(stockList)
-            console.log(stockList)
-            return stockInfo.quotes.quote
         }
         fetchStocksData();
     }, [favorites]);
@@ -77,14 +75,12 @@ export default function FavoriteSection({ favorites, setFavorites}) {
                     <br></br>
                     <div>Performance: {stock.savedPriceChangePercentage}%</div>
                     
-                    <button onClick={() => handleRemoveFavorite(stock.symbol)}>Remove Favorite</button>
+                    <button onClick={() => handleRemoveFavorite(stock.symbol)} className='remove-btn'>Remove Favorite</button>
                 </div>
                 ))} 
 
                
             </div>
-            
-
         </div>
     );
 }

@@ -24,7 +24,7 @@
     background: linear-gradient(180deg, rgba(52,52,52,1) 0%, rgba(68,68,68,1) 100%);
 }
 
-.stock-card button {
+.remove-btn {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 4px;
@@ -38,10 +38,10 @@
     margin-top: 15px;
 }
 
-.stock-card button:hover {
+.remove-btn:hover {
     background-color: var(--dark-warning-color); 
 }
   
-.stock-card button:active {
+.remove-btn:active {
     background-color: var(--darker-warning-color);
 }
