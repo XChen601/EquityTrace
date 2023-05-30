@@ -65,7 +65,7 @@ const PopularSection = ({addToFavorites}) => {
             </div>
             ))} 
         </div>
-        <button onClick={showMoreHandler}>Show More</button>
+        <button className="expand-btn" onClick={showMoreHandler}>SHOW MORE</button>
     </div>
     )
 }
