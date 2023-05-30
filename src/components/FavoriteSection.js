@@ -67,7 +67,7 @@ export default function FavoriteSection({ favorites, setFavorites}) {
 
                 {favoritedStocksData.map(stock => (
                 <div className='stock-card'>
-                    <h4>{stock.symbol}</h4>
+                    <h4 className="card-title">{stock.symbol}</h4>
                     <div>{stock.description}</div>
                     <br></br>
                     <div>Current Price: ${stock.ask}</div>

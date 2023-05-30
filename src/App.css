@@ -16,3 +16,8 @@ body {
     background-color: var(--accent-color);
     color: var(--text-color);
 }
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
