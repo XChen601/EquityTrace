@@ -1,3 +1,4 @@
+import DetailedView from "./DetailedView";
 
 export default function FavoriteCard ({ stock, handleRemoveFavorite }) {
   return (
@@ -7,6 +8,7 @@ export default function FavoriteCard ({ stock, handleRemoveFavorite }) {
       <br></br>
       <div>Current Price: ${stock.ask}</div>
       <div>Day Change: {stock.change_percentage}%</div>
+      <DetailedView stockInfo={stock} />
       <br></br>
       <div>Performance: {stock.savedPriceChangePercentage}%</div>
 

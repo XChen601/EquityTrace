@@ -123,3 +123,14 @@ body {
     gap: 0.5rem;
     padding: 0 10px;
 }
+
+.detailed-btn {
+  background-color: rgba(0,0,0,0);
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  font-weight: 700;
+  padding: 5px;
+  padding-bottom: 0;
+  border-radius: 0;
+}

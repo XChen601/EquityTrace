@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../css/PopularSection.css";
+import DetailedView from "./DetailedView";
 const PopularSection = ({ addToFavorites }) => {
   const [topStocksInfo, setTopStocksInfo] = useState([]);
   const [displayAmount, setDisplayAmount] = useState(8);
@@ -63,6 +64,7 @@ const PopularSection = ({ addToFavorites }) => {
             <br></br>
             <div>Current Price: ${stock.ask}</div>
             <div>Day Change: {stock.change_percentage}%</div>
+            <DetailedView stockInfo={stock} />
             <button
               className="favorite-btn"
               onClick={() => addToFavorites(stock.symbol, stock.ask)}
