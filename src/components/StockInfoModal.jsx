@@ -20,6 +20,8 @@ export default function StockInfoModal({
   setModalVisibility,
 }) {
   const [stockInfo, setStockInfo] = useState({});
+  const [showDetailed, setShowDetailed] = useState(false);
+  const [buttonText, setButtonText] = useState("Show More");
 
   async function addToFavorites() {
     await addToDatabase(stockName, stockInfo.ask);
@@ -63,6 +65,16 @@ export default function StockInfoModal({
     }
     fetchStockInfo(stockName);
   }, [stockName]);
+
+  const handleClick = () => {
+    setShowDetailed(!showDetailed);
+    if (buttonText === "Show More") {
+      setButtonText("Show Less");
+    } else {
+      setButtonText("Show More");
+    }
+  };
+
   return (
     <div>
       <MDBModal
@@ -85,6 +97,16 @@ export default function StockInfoModal({
               <div>{stockInfo.description}</div>
               <div>Price: {stockInfo.ask}</div>
               <div>Day Change: {stockInfo.change_percentage}%</div>
+              
+              {showDetailed && (
+                <>
+                  <div>Volume: {stockInfo.volume}</div>
+                  <div>52 Week High: {stockInfo.week_52_high}</div>
+                  <div>52 Week Low: {stockInfo.week_52_low}</div>
+                </>
+                
+              )}
+              <button className="detailed-btn" onClick={handleClick}>{buttonText}</button>
             </MDBModalBody>
 
             <MDBModalFooter>

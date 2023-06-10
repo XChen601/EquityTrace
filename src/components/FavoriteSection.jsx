@@ -8,14 +8,19 @@ import {
   asyncGetUserName,
 } from "../Firebase";
 import "bootstrap/dist/css/bootstrap.css";
+import FavoriteCard from "./FavoriteCard";
 
 export default function FavoriteSection({ favorites, setFavorites }) {
   const [favoritedStocksData, setFavoritedStocksData] = useState([]);
 
   const handleRemoveFavorite = async (symbol) => {
     await deleteFromDatabase(symbol, getUserName());
-    const userFavoriteList = await getUserFavorites(getUserName());
-    await setFavorites(userFavoriteList);
+    // remove symbol from favoritedStocksData
+    const newFavoritedStocksData = favoritedStocksData.filter(
+      (stock) => stock.symbol !== symbol
+    );
+    setFavoritedStocksData(newFavoritedStocksData);
+
   };
 
   useEffect(() => {
@@ -74,22 +79,7 @@ export default function FavoriteSection({ favorites, setFavorites }) {
 
       <div className="card-section">
         {favoritedStocksData.map((stock) => (
-          <div className="stock-card">
-            <h4 className="card-title">{stock.symbol}</h4>
-            <div>{stock.description}</div>
-            <br></br>
-            <div>Current Price: ${stock.ask}</div>
-            <div>Day Change: {stock.change_percentage}%</div>
-            <br></br>
-            <div>Performance: {stock.savedPriceChangePercentage}%</div>
-
-            <button
-              onClick={() => handleRemoveFavorite(stock.symbol)}
-              className="remove-btn"
-            >
-              Remove Favorite
-            </button>
-          </div>
+          <FavoriteCard stock={stock} handleRemoveFavorite={handleRemoveFavorite} />
         ))}
       </div>
     </div>

@@ -3,6 +3,8 @@
     color: var(--text-color);
 }
 
+
+
 .modal-content button {
     display: inline-block;
     padding: 10px 20px;
@@ -25,5 +27,15 @@
 
 .modal-content .close-btn {
     background-color: var(--warning-color); 
+}
+
+.modal-content .detailed-btn {
+  background-color: rgba(0,0,0,0);
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 0;
 }
   
