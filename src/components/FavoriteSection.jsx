@@ -15,7 +15,7 @@ export default function FavoriteSection({ favorites, setFavorites }) {
   const handleRemoveFavorite = async (symbol) => {
     await deleteFromDatabase(symbol, getUserName());
     const userFavoriteList = await getUserFavorites(getUserName());
-    setFavorites(userFavoriteList);
+    await setFavorites(userFavoriteList);
   };
 
   useEffect(() => {

@@ -74,21 +74,21 @@ export default function Search({ setFavorites }) {
   }
 
 
-  // hides the search list when clicking outside of the search box
+  // hides the search list when clicking outside of the search box and shows when clicking on search box
   useEffect(() => {
-      const hideList = (e) => {
-        console.log(e.target.className)
-        if (e.target.className !== "symbol-list" ) {
-          setSearchListVisibility(false);
-        }
-        if (e.target.closest('.search-box') && e.target.tagName === 'INPUT') {
-          setSearchListVisibility(true);
-        }
-      };
-      document.addEventListener("click", hideList);
-      return () => {
-        document.removeEventListener("click", hideList);
-      };
+    const hideList = (e) => {
+      console.log(e.target.className)
+      if (e.target.className !== "symbol-list" ) {
+        setSearchListVisibility(false);
+      }
+      if (e.target.closest('.search-box') && e.target.tagName === 'INPUT') {
+        setSearchListVisibility(true);
+      }
+    };
+    document.addEventListener("click", hideList);
+    return () => {
+      document.removeEventListener("click", hideList);
+    };
   }, []);
 
   return (
