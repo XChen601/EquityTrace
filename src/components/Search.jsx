@@ -9,7 +9,15 @@ export default function Search({ setFavorites }) {
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const toggleShow = () => setModalVisibility(!modalVisibility);
-
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+        setClickedSymbol(inputValue);
+        console.log('test')
+        setInputValue("");
+        setSymbolList([]);
+        toggleShow();
+    }
+  };
   const onClickHandler = (e) => {
     setClickedSymbol(e.target.innerText);
 
@@ -72,6 +80,7 @@ export default function Search({ setFavorites }) {
             value={inputValue}
             onChange={handleInputChange}
             placeholder="Search for a stock"
+            onKeyUp={handleKeyPress}
           />
           <div className="list-container">
             <div className="symbol-list">

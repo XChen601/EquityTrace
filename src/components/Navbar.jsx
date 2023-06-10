@@ -1,5 +1,4 @@
 import SignIn from "./SignIn";
-import "../css/Navbar.css";
 import logo from "../images/logo.png";
 
 const Navbar = ({ setFavorites }) => {

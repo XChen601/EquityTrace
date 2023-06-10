@@ -19,7 +19,7 @@
 .modal-content .favorite-btn {
     background-color: var(--accent-color); 
 }
-.favorite-btn:hover {
+.modal-content .favorite-btn:hover {
     background-color: var(--dark-accent-color); 
 }
 

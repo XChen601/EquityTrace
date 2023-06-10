@@ -11,13 +11,14 @@
     color: black;
     position: absolute;
     width: 100%;
+    border-radius: 2px;
+    box-shadow: 0 0 5px 1px var(--accent-color)
 }
+
 
 
 .symbol-item {
     border-bottom: 1px solid gray;
-    border-left: 1px solid var(--accent-color);
-    border-right: 1px solid var(--accent-color);
     padding: 2px 8px;
     cursor: pointer;
 }
