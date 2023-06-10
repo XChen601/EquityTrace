@@ -6,6 +6,7 @@ export default function Search({ setFavorites }) {
   const [inputValue, setInputValue] = useState("");
   const [symbolList, setSymbolList] = useState([]);
   const [clickedSymbol, setClickedSymbol] = useState("GOOGL");
+  const [searchListVisibility, setSearchListVisibility] = useState(true);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const toggleShow = () => setModalVisibility(!modalVisibility);
@@ -28,6 +29,7 @@ export default function Search({ setFavorites }) {
 
   const handleInputChange = async (e) => {
     const value = e.target.value;
+    setSearchListVisibility(true);
     setInputValue(value);
 
     // Call your function to retrieve stock symbols based on the input value
@@ -73,17 +75,21 @@ export default function Search({ setFavorites }) {
 
 
   // hides the search list when clicking outside of the search box
-    useEffect(() => {
-        const hideList = (e) => {
-            if (e.target.className !== "symbol-list") {
-                setSymbolList([]);
-            }
-        };
-        document.addEventListener("click", hideList);
-        return () => {
-            document.removeEventListener("click", hideList);
-        };
-    }, []);
+  useEffect(() => {
+      const hideList = (e) => {
+        console.log(e.target.className)
+        if (e.target.className !== "symbol-list" ) {
+          setSearchListVisibility(false);
+        }
+        if (e.target.closest('.search-box') && e.target.tagName === 'INPUT') {
+          setSearchListVisibility(true);
+        }
+      };
+      document.addEventListener("click", hideList);
+      return () => {
+        document.removeEventListener("click", hideList);
+      };
+  }, []);
 
   return (
     <>
@@ -97,18 +103,20 @@ export default function Search({ setFavorites }) {
             onKeyUp={handleKeyPress}
           />
           <div className="list-container">
-            <div className="symbol-list">
-              {symbolList &&
-                symbolList.map((symbol) => (
-                  <div
-                    className="symbol-item"
-                    onClick={onClickHandler}
-                    key={symbol}
-                  >
-                    {symbol}
-                  </div>
-                ))}
-            </div>
+            {searchListVisibility && (
+              <div className="symbol-list">
+                {symbolList &&
+                  symbolList.map((symbol) => (
+                    <div
+                      className="symbol-item"
+                      onClick={onClickHandler}
+                      key={symbol}
+                    >
+                      {symbol}
+                    </div>
+                  ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
