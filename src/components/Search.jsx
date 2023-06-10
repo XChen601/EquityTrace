@@ -71,6 +71,20 @@ export default function Search({ setFavorites }) {
     }
   }
 
+
+  // hides the search list when clicking outside of the search box
+    useEffect(() => {
+        const hideList = (e) => {
+            if (e.target.className !== "symbol-list") {
+                setSymbolList([]);
+            }
+        };
+        document.addEventListener("click", hideList);
+        return () => {
+            document.removeEventListener("click", hideList);
+        };
+    }, []);
+
   return (
     <>
       <div className="search-section">
