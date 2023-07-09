@@ -5,7 +5,7 @@ const {
   setFavorite,
   updateFavorite,
   deleteFavorite,
-} = require("../controllers/favoritesController");
+} = require("../controllers/favoriteController");
 
 router.route("/").get(getFavorites).post(setFavorite);
 

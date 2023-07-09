@@ -19,6 +19,8 @@
   "homepage": "https://github.com/XChen601/StockTrace#readme",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "express-async-handler": "^1.2.0"
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.3.2"
   }
 }
