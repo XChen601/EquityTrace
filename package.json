@@ -1,0 +1,24 @@
+{
+  "name": "stocktrace",
+  "version": "1.0.0",
+  "description": "MERN app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XChen601/StockTrace.git"
+  },
+  "author": "Xing Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XChen601/StockTrace/issues"
+  },
+  "homepage": "https://github.com/XChen601/StockTrace#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express-async-handler": "^1.2.0"
+  }
+}

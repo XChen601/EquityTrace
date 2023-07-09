@@ -1,15 +1,15 @@
 const express = require("express");
+const dotenv = require("dotenv").config();
+const { errorHandler } = require("./middleware/errorMiddleware");
+const port = process.env.PORT || 5000;
 
 const app = express();
 
-// Connect to the database
-app.get("/", (req, res) => {
-  res.send("API running");
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// ... Rest of your app code
+app.use("/api/favorites", require("./routes/favorites"));
 
-// Start the server
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
