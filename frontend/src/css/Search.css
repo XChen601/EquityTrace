@@ -1,0 +1,43 @@
+.list-container {
+    width: 100%;
+    background-color: black;
+    position: relative;
+}
+
+.symbol-list {
+    display: flex;
+    flex-direction: column; 
+    background-color: white;
+    color: black;
+    position: absolute;
+    width: 100%;
+    border-radius: 2px;
+    box-shadow: 0 0 5px 1px var(--accent-color)
+}
+
+
+
+.symbol-item {
+    border-bottom: 1px solid gray;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    position: relative;
+}
+
+.search-section input {
+    width: 300px;
+    height: 50px;
+    border: solid 2px var(--accent-color);
+    padding: 0px 10px;
+}
+
+.symbol-item:hover {
+    font-weight: 600;
+}
