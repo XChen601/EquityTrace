@@ -1,21 +1,30 @@
 const mongoose = require("mongoose");
 
-// Define the schema
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  savedStocks: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Stock",
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-});
+    email: {
+      type: String,
+      required: [true, "Please enter an email"],
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Please enter a password"],
+    },
+    savedStocks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Stock",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-// Create the model based on the schema
-const User = mongoose.model("User", userSchema);
-
-// Export the model
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);

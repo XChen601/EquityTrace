@@ -1,9 +1,10 @@
 const asyncHandler = require("express-async-handler");
 
 const Favorite = require("../models/favorite");
+const User = require("../models/user");
 
 const getFavorites = asyncHandler(async (req, res) => {
-  const favorites = await Favorite.find({});
+  const favorites = await Favorite.find({ user: req.user.id });
   res.json(favorites);
 });
 
@@ -12,6 +13,7 @@ const setFavorite = asyncHandler(async (req, res) => {
     stockTicker: req.body.stockTicker,
     savedPrice: req.body.savedPrice,
     notes: req.body.notes,
+    user: req.user.id,
   });
   res.json(favorite);
 });
@@ -22,6 +24,19 @@ const updateFavorite = asyncHandler(async (req, res) => {
   if (!favorite) {
     res.status(404);
     throw new Error("Favorite not found");
+  }
+  dd;
+  const user = await User.findById(req.user.id);
+
+  // check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  if (favorite.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
   }
 
   const updatedFavorite = await Favorite.findByIdAndUpdate(
@@ -41,6 +56,19 @@ const deleteFavorite = asyncHandler(async (req, res) => {
   if (!favorite) {
     res.status(404);
     throw new Error("Favorite not found");
+  }
+
+  const user = await User.findById(req.user.id);
+
+  // check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  if (favorite.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
   }
 
   await favorite.deleteOne();
