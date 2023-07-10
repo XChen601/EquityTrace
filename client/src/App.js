@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
-import FavoriteSection from "./components/FavoriteSection";
-import Search from "./components/Search";
-import "./App.css";
-import Navbar from "./components/Navbar";
-import PopularSection from "./components/PopularSection";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
-  const [favorites, setFavorites] = useState([]);
-
-  async function addToFavorites(stockName, stockPrice) {}
-
   return (
     <>
-      <Navbar setFavorites={setFavorites} />
-      <Search setFavorites={setFavorites} />
-      <FavoriteSection favorites={favorites} setFavorites={setFavorites} />
-      <PopularSection addToFavorites={addToFavorites} />
-      <Footer />
+      <Router>
+        <div className="container">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }
