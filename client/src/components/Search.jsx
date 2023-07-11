@@ -28,12 +28,12 @@ export default function Search({ setFavorites }) {
   };
 
   const handleInputChange = async (e) => {
-    const value = e.target.value;
+    setSearchText(e.target.value);
     setSearchListVisibility(true);
-    setSearchText(value);
 
-    // Call your function to retrieve stock symbols based on the input value
-    const symbols = await fetchSymbols(value);
+
+    // Call function to retrieve stock symbols based on the input value
+    const symbols = await fetchSymbols(searchText);
     setSymbolList(symbols);
   };
 

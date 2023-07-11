@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 //import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
+import {  useDispatch } from "react-redux";
+import {createFavorite} from "../features/favorites/favoriteSlice";
 import {
   MDBBtn,
   MDBModal,
@@ -24,6 +26,19 @@ export default function StockInfoModal({
   const [showDetailed, setShowDetailed] = useState(false);
   const [buttonText, setButtonText] = useState("Show More");
 
+  const dispatch = useDispatch();
+
+  const onFavoriteClick = () => {
+    const savedStockInfo = {
+      stockTicker: "GOOGL",
+      savedPrice: 100,
+      notes: "This is a note",
+    }; 
+
+    dispatch(createFavorite(savedStockInfo));
+  };
+
+  
   async function addToFavorites() {
     // await addToDatabase(stockName, stockInfo.ask);
     // const userFavoriteList = await getUserFavorites(getUserName());
@@ -94,7 +109,7 @@ export default function StockInfoModal({
             </MDBModalBody>
 
             <MDBModalFooter>
-              <button className="favorite-btn" onClick={addToFavorites}>
+              <button className="favorite-btn" onClick={onFavoriteClick}>
                 Favorite!
               </button>
               <button className="close-btn" onClick={toggleShow}>
