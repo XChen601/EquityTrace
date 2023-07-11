@@ -25,16 +25,14 @@ const updateFavorite = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Favorite not found");
   }
-  dd;
-  const user = await User.findById(req.user.id);
 
   // check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
-  if (favorite.user.toString() !== user.id) {
+  if (favorite.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
@@ -58,15 +56,13 @@ const deleteFavorite = asyncHandler(async (req, res) => {
     throw new Error("Favorite not found");
   }
 
-  const user = await User.findById(req.user.id);
-
   // check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
-  if (favorite.user.toString() !== user.id) {
+  if (favorite.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }

@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import FavoriteSection from "../components/FavoriteSection";
-import Search from "../components/Search";
-import "../App.css";
-import Navbar from "../components/Navbar";
-import PopularSection from "../components/PopularSection";
-import Footer from "../components/Footer";
+import {useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Search from '../components/Search';
+
 
 function Dashboard() {
-  const [favorites, setFavorites] = useState([]);
+  const navigate = useNavigate()
 
-  async function addToFavorites(stockName, stockPrice) {}
+  const {user} = useSelector((state) => state.auth)
 
+  useEffect(() => {
+
+  }, [user, navigate])
   return (
     <>
-      <Navbar setFavorites={setFavorites} />
-      <Search setFavorites={setFavorites} />
-      <FavoriteSection favorites={favorites} setFavorites={setFavorites} />
-      <PopularSection addToFavorites={addToFavorites} />
-      <Footer />
+      <section className='heading'>
+        <h1>Welcome {user ? user.name : "Stranger"}</h1>
+      </section>
+
+      <Search />
     </>
   );
 }

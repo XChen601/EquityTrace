@@ -3,7 +3,7 @@ import StockInfoModal from "./StockInfoModal";
 import "../css/Search.css";
 
 export default function Search({ setFavorites }) {
-  const [inputValue, setInputValue] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [symbolList, setSymbolList] = useState([]);
   const [clickedSymbol, setClickedSymbol] = useState("GOOGL");
   const [searchListVisibility, setSearchListVisibility] = useState(true);
@@ -12,9 +12,9 @@ export default function Search({ setFavorites }) {
   const toggleShow = () => setModalVisibility(!modalVisibility);
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-        setClickedSymbol(inputValue);
+        setClickedSymbol(searchText);
         console.log('test')
-        setInputValue("");
+        setSearchText("");
         setSymbolList([]);
         toggleShow();
     }
@@ -22,7 +22,7 @@ export default function Search({ setFavorites }) {
   const onClickHandler = (e) => {
     setClickedSymbol(e.target.innerText);
 
-    setInputValue("");
+    setSearchText("");
     setSymbolList([]);
     toggleShow();
   };
@@ -30,7 +30,7 @@ export default function Search({ setFavorites }) {
   const handleInputChange = async (e) => {
     const value = e.target.value;
     setSearchListVisibility(true);
-    setInputValue(value);
+    setSearchText(value);
 
     // Call your function to retrieve stock symbols based on the input value
     const symbols = await fetchSymbols(value);
@@ -90,13 +90,18 @@ export default function Search({ setFavorites }) {
     };
   }, []);
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+  };
+
   return (
     <>
       <div className="search-section">
         <div className="search-box">
           <input
             type="text"
-            value={inputValue}
+            value={searchText}
             onChange={handleInputChange}
             placeholder="Search for a stock"
             onKeyUp={handleKeyPress}
