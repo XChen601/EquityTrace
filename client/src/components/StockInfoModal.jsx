@@ -30,8 +30,8 @@ export default function StockInfoModal({
 
   const onFavoriteClick = () => {
     const savedStockInfo = {
-      stockTicker: "GOOGL",
-      savedPrice: 100,
+      stockTicker: stockInfo.symbol,
+      savedPrice: stockInfo.ask,
       notes: "This is a note",
     }; 
 
