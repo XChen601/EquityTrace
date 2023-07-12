@@ -9,6 +9,19 @@ const initialState = {
   message: "",
 };
 
+// Check if favorite in favorites
+export const checkFavorite = createAsyncThunk(
+  "favorites/check",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await favoriteService.checkFavorite(id, token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 // Create new favorite
 export const createFavorite = createAsyncThunk(
   "favorites/create",
@@ -16,6 +29,25 @@ export const createFavorite = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await favoriteService.createFavorite(favoriteData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Update favorite or create new favorite
+export const updateFavorite = createAsyncThunk(
+  "favorites/update",
+  async (favoriteData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await favoriteService.updateFavorite(favoriteData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -111,6 +143,20 @@ export const favoriteSlice = createSlice({
         );
       })
       .addCase(deleteFavorite.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(updateFavorite.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateFavorite.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.favorites.push(action.payload);
+      })
+      .addCase(updateFavorite.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

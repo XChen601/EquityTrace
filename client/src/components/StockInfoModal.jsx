@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 //import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
 import {  useDispatch } from "react-redux";
-import {createFavorite} from "../features/favorites/favoriteSlice";
+import {updateFavorite} from "../features/favorites/favoriteSlice";
 import {
   MDBBtn,
   MDBModal,
@@ -35,7 +35,7 @@ export default function StockInfoModal({
       notes: "This is a note",
     }; 
 
-    dispatch(createFavorite(savedStockInfo));
+    dispatch(updateFavorite(savedStockInfo));
   };
 
   

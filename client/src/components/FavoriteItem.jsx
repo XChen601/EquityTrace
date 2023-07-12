@@ -10,7 +10,7 @@ function FavoriteItem({ favorite }) {
         <h2>{favorite.stockTicker}</h2>
         <h3>{favorite.savedPrice}</h3>
         <h3>{favorite.notes}</h3>
-        <button onClick={() => dispatch(deleteFavorite(favorite._id))}></button>
+        <button onClick={() => dispatch(deleteFavorite(favorite._id))}>X</button>
       </div>
     </div>
   )

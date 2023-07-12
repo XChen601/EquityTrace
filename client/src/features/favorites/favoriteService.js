@@ -15,6 +15,19 @@ const createFavorite = async (favoriteData, token) => {
   return response.data;
 };
 
+// Update favorite or create new favorite
+const updateFavorite = async (favoriteData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL, favoriteData, config);
+  console.log(response.data);
+  return response.data;
+};
+
 // get favorites
 const getFavorites = async (token) => {
   const config = {
@@ -24,7 +37,7 @@ const getFavorites = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
-
+  console.log(response.data);
   return response.data;
 };
 
@@ -45,6 +58,7 @@ const favoriteService = {
   createFavorite,
   getFavorites,
   deleteFavorite,
+  updateFavorite,
 };
 
 export default favoriteService;
