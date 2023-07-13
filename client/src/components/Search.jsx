@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import StockInfoModal from "./StockInfoModal";
 import "../css/Search.css";
 
-export default function Search({ setFavorites }) {
+export default function Search() {
   const [searchText, setSearchText] = useState("");
   const [symbolList, setSymbolList] = useState([]);
   const [clickedSymbol, setClickedSymbol] = useState("GOOGL");
@@ -10,10 +10,9 @@ export default function Search({ setFavorites }) {
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const toggleShow = () => setModalVisibility(!modalVisibility);
-  const handleKeyPress = (event) => {
+  const handleEnterKey = (event) => {
     if (event.key === 'Enter') {
         setClickedSymbol(searchText);
-        console.log('test')
         setSearchText("");
         setSymbolList([]);
         toggleShow();
@@ -28,13 +27,15 @@ export default function Search({ setFavorites }) {
   };
 
   const handleInputChange = async (e) => {
-    setSearchText(e.target.value);
+    const searchValue = e.target.value
+    setSearchText(searchValue);
     setSearchListVisibility(true);
 
 
     // Call function to retrieve stock symbols based on the input value
-    const symbols = await fetchSymbols(searchText);
+    const symbols = await fetchSymbols(searchValue);
     setSymbolList(symbols);
+    console.log(symbols)
   };
 
   async function fetchSymbols(searchString) {
@@ -45,7 +46,6 @@ export default function Search({ setFavorites }) {
 
     try {
       const tradierToken = process.env.REACT_APP_TRADIER_TOKEN;
-      console.log(tradierToken);
       const response = await fetch(
         `https://api.tradier.com/v1/markets/lookup?q=${searchString}`,
         {
@@ -90,11 +90,6 @@ export default function Search({ setFavorites }) {
     };
   }, []);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-  };
-
   return (
     <>
       <div className="search-section">
@@ -104,7 +99,7 @@ export default function Search({ setFavorites }) {
             value={searchText}
             onChange={handleInputChange}
             placeholder="Search for a stock"
-            onKeyUp={handleKeyPress}
+            onKeyUp={handleEnterKey}
           />
           <div className="list-container">
             {searchListVisibility && (
@@ -126,7 +121,6 @@ export default function Search({ setFavorites }) {
       </div>
       <StockInfoModal
         stockName={clickedSymbol}
-        setFavorites={setFavorites}
         modalVisibility={modalVisibility}
         toggleShow={toggleShow}
         setModalVisibility={setModalVisibility}

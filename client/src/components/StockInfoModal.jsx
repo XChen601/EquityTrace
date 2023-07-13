@@ -17,14 +17,11 @@ import DetailedView from "./DetailedView";
 
 export default function StockInfoModal({
   stockName,
-  setFavorites,
   modalVisibility,
   toggleShow,
   setModalVisibility,
 }) {
   const [stockInfo, setStockInfo] = useState({});
-  const [showDetailed, setShowDetailed] = useState(false);
-  const [buttonText, setButtonText] = useState("Show More");
 
   const dispatch = useDispatch();
 
@@ -37,13 +34,6 @@ export default function StockInfoModal({
 
     dispatch(updateFavorite(savedStockInfo));
   };
-
-  
-  async function addToFavorites() {
-    // await addToDatabase(stockName, stockInfo.ask);
-    // const userFavoriteList = await getUserFavorites(getUserName());
-    // setFavorites(userFavoriteList);
-  }
 
   const setNotFound = () => {
     setStockInfo({
