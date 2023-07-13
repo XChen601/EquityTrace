@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import StockInfoModal from "./StockInfoModal";
+import SearchModal from "./SearchModal";
 import "../css/Search.css";
 
 export default function Search() {
@@ -9,13 +9,13 @@ export default function Search() {
   const [searchListVisibility, setSearchListVisibility] = useState(true);
   const [modalVisibility, setModalVisibility] = useState(false);
 
-  const toggleShow = () => setModalVisibility(!modalVisibility);
+  const toggleModalVisibility = () => setModalVisibility(!modalVisibility);
   const handleEnterKey = (event) => {
     if (event.key === 'Enter') {
         setClickedSymbol(searchText);
         setSearchText("");
         setSymbolList([]);
-        toggleShow();
+        toggleModalVisibility();
     }
   };
   const onClickHandler = (e) => {
@@ -23,7 +23,7 @@ export default function Search() {
 
     setSearchText("");
     setSymbolList([]);
-    toggleShow();
+    toggleModalVisibility();
   };
 
   const handleInputChange = async (e) => {
@@ -119,10 +119,10 @@ export default function Search() {
           </div>
         </div>
       </div>
-      <StockInfoModal
+      <SearchModal
         stockName={clickedSymbol}
         modalVisibility={modalVisibility}
-        toggleShow={toggleShow}
+        toggleModalVisibility={toggleModalVisibility}
         setModalVisibility={setModalVisibility}
       />
     </>

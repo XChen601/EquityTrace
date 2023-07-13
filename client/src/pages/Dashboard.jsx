@@ -11,7 +11,7 @@ function Dashboard() {
   return (
     <>
       <section className='heading'>
-        <h1>Welcome {user ? user.name : "Stranger"}</h1>
+        <h1>Welcome <div className='username'>{user ? user.name : "Stranger"}</div></h1>
       </section>
 
       <Search />

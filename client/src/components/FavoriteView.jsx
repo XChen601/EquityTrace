@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../components/Spinner';
 import { getFavorites, reset } from '../features/favorites/favoriteSlice';
 import FavoriteItem from '../components/FavoriteItem';
-import { useState } from 'react';
-import axios from 'axios';
+import '../css/FavoriteView.css'
 
 function FavoriteView() {
   const navigate = useNavigate()

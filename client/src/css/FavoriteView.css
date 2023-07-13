@@ -1,0 +1,65 @@
+/* Favorite view */
+.favorites {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.favorite {
+  position: relative;
+  padding: 20px;
+  background-color: #022859;
+  color: #D9D9D9;
+  border-radius: 8px;
+  margin: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 280px;
+}
+
+/* Styles for the favorite head component */
+.favorite-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.favorite-head h2 {
+  color: #D9D9D9;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.description {
+  font-size: 5em;
+  margin: 0 0 20px 0;
+  color: #898989;
+}
+
+/* Styles for the close button */
+.close-btn {
+  background-color:#FF7F50;
+  border: none;
+  color: #D9D9D9;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1.2em;
+}
+
+/* Other general styles */
+.favorites p, .favorites h3, .favorites div {
+  color: #898989;
+  font-size: 1.05em;
+}
+
+.favorites h3 {
+  margin: 5px 0;
+  font-size: 1.25em;
+}
+
+.favorites div {
+  font-size: .95em;
+  color: #2C7973;
+}

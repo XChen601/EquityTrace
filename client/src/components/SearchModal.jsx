@@ -2,23 +2,14 @@ import { useEffect, useState } from "react";
 //import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
 import {  useDispatch } from "react-redux";
 import {updateFavorite} from "../features/favorites/favoriteSlice";
-import {
-  MDBBtn,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from "mdb-react-ui-kit";
-import "../css/StockInfoModal.css";
+import "../css/SearchModal.css";
 import DetailedView from "./DetailedView";
+import {MDBModal} from 'mdb-react-ui-kit' 
 
-export default function StockInfoModal({
+export default function SearchModal({
   stockName,
   modalVisibility,
-  toggleShow,
+  toggleModalVisibility,
   setModalVisibility,
 }) {
   const [stockInfo, setStockInfo] = useState({});
@@ -72,43 +63,28 @@ export default function StockInfoModal({
     fetchStockInfo(stockName);
   }, [stockName]);
 
-  return (
-    <div>
-      <MDBModal
-        show={modalVisibility}
-        setShow={setModalVisibility}
-        tabIndex="-1"
-      >
-        <MDBModalDialog centered>
-          <MDBModalContent>
-            <MDBModalHeader>
-              <MDBModalTitle>Stock Information:</MDBModalTitle>
-              <MDBBtn
-                className="btn-close"
-                color="none"
-                onClick={toggleShow}
-              ></MDBBtn>
-            </MDBModalHeader>
-            <MDBModalBody>
-              <h4>Ticker: {stockInfo.symbol}</h4>
-              <div>{stockInfo.description}</div>
-              <div>Price: {stockInfo.ask}</div>
-              <div>Day Change: {stockInfo.change_percentage}%</div>
-              
-              <DetailedView stockInfo={stockInfo}/>
-            </MDBModalBody>
+  if (!modalVisibility) return null;
 
-            <MDBModalFooter>
-              <button className="favorite-btn" onClick={onFavoriteClick}>
-                Favorite!
-              </button>
-              <button className="close-btn" onClick={toggleShow}>
-                Close
-              </button>
-            </MDBModalFooter>
-          </MDBModalContent>
-        </MDBModalDialog>
-      </MDBModal>
-    </div>
+  return (
+      <div className="modal-background">
+        <div className="modal">
+          <div>Stock Information:</div>
+          <button
+            className="close-btn"
+            color="none"
+            onClick={toggleModalVisibility}
+          >X</button>
+
+          <h3>{stockInfo.symbol}</h3>
+          <div>{stockInfo.description}</div>
+          <div>Price: {stockInfo.ask}</div>
+          <div>Day Change: {stockInfo.change_percentage}%</div>
+          
+          <DetailedView stockInfo={stockInfo}/>
+          <button className="favorite-btn" onClick={onFavoriteClick}>
+            Favorite
+          </button>
+        </div>
+      </div>
   );
 }

@@ -32,17 +32,18 @@ function FavoriteItem({ favorite }) {
   return (
     <div className="favorite">
       <div>
-        <div>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
-        <h2>{favorite.stockTicker}</h2>
-        <p>{stockData.description}</p>
+        <div className='favorite-head'>
+          <h2>{favorite.stockTicker}</h2>
+          <button className="close-btn" onClick={() => dispatch(deleteFavorite(favorite._id))}>X</button>
+        </div>
+        <p className='description'>{stockData.description}</p>
         <h3>Saved Price: {favorite.savedPrice}</h3>
         <h3>Saved Notes: {favorite.notes}</h3>      
         <h3>Current Price: {stockData.ask}</h3>
         <h3>Price Change: {stockData.change_percentage}%</h3>
-
         <h3>Overall Performance: {((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</h3>
-        
-        <button onClick={() => dispatch(deleteFavorite(favorite._id))}>X</button>
+
+        <div>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
       </div>
     </div>
   )
