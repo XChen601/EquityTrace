@@ -4,7 +4,8 @@ export default function DetailedView ({stockInfo}) {
   const [buttonText, setButtonText] = useState("Show More");
   const [showDetailed, setShowDetailed] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    event.preventDefault();
     setShowDetailed(!showDetailed);
     if (buttonText === "Show More") {
       setButtonText("Show Less");

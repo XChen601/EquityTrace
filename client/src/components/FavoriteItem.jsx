@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux'
 import { deleteFavorite } from '../features/favorites/favoriteSlice'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import {FiTrash} from 'react-icons/fi'
 
 function FavoriteItem({ favorite }) {
   const [stockData, setStockData] = useState({})
@@ -34,16 +35,20 @@ function FavoriteItem({ favorite }) {
       <div>
         <div className='favorite-head'>
           <h2>{favorite.stockTicker}</h2>
-          <button className="close-btn" onClick={() => dispatch(deleteFavorite(favorite._id))}>X</button>
+          <button className="close-btn" onClick={() => dispatch(deleteFavorite(favorite._id))}><FiTrash /></button>
         </div>
         <p className='description'>{stockData.description}</p>
-        <h3>Saved Price: {favorite.savedPrice}</h3>
-        <h3>Saved Notes: {favorite.notes}</h3>      
-        <h3>Current Price: {stockData.ask}</h3>
-        <h3>Price Change: {stockData.change_percentage}%</h3>
-        <h3>Overall Performance: {((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</h3>
+        <h4>Current Price: <div>${stockData.ask}</div></h4>
+        <h4>Price Movement: <div>{stockData.change_percentage}%</div></h4>
 
-        <div>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
+
+        <h4>Saved Price: <div>${favorite.savedPrice}</div></h4>
+        <h4>Notes: <div>{favorite.notes}</div></h4>      
+        
+        
+        <h4>Overall Performance: <div>{((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</div></h4>
+
+        <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
       </div>
     </div>
   )

@@ -154,7 +154,15 @@ export const favoriteSlice = createSlice({
       .addCase(updateFavorite.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.favorites.push(action.payload);
+        // check if favorite already exists
+        const index = state.favorites.findIndex(
+          (favorite) => favorite._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.favorites[index] = action.payload;
+        } else {
+          state.favorites.push(action.payload);
+        }
       })
       .addCase(updateFavorite.rejected, (state, action) => {
         state.isLoading = false;

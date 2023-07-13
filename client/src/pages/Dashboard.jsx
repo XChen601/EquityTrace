@@ -2,6 +2,7 @@
 import { useSelector} from 'react-redux';
 import Search from '../components/Search';
 import FavoriteView from '../components/FavoriteView';
+import Footer from '../components/Footer';
 
 
 function Dashboard() {
@@ -16,6 +17,7 @@ function Dashboard() {
 
       <Search />
       <FavoriteView />
+      <Footer />
     </>
   );
 }

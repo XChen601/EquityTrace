@@ -36,7 +36,7 @@ function FavoriteView() {
               <FavoriteItem key={favorite.id} favorite={favorite} />
             ))}
           </div>
-        ) : (<h3>You have no favorites</h3>)}
+        ) : (<h3 className='empty'>You have no favorites</h3>)}
       </section>
   )
 }

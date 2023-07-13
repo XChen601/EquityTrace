@@ -22,7 +22,7 @@ const setFavorite = asyncHandler(async (req, res) => {
 const updateFavorite = asyncHandler(async (req, res) => {
   console.log("req" + req.body.stockTicker);
   console.log("test");
-  const updatedFavorite = await Favorite.updateOne(
+  const updatedFavorite = await Favorite.findOneAndUpdate(
     { stockTicker: req.body.stockTicker, user: req.user.id },
     {
       $set: {
@@ -37,13 +37,14 @@ const updateFavorite = asyncHandler(async (req, res) => {
       },
     },
     {
-      upsert: true,
+      new: true, // This option returns the updated document
+      upsert: true, // This option creates the document if it doesn't exist
     }
   );
 
-  console.log(updatedFavorite.upsertedId);
-  const favorite = await Favorite.findOne({ _id: updatedFavorite.upsertedId });
-  res.json(favorite);
+  console.log(updatedFavorite._id);
+  const favorite = await Favorite.findOne({ _id: updatedFavorite._id });
+  res.json(updatedFavorite);
 });
 
 const deleteFavorite = asyncHandler(async (req, res) => {

@@ -13,14 +13,16 @@ export default function SearchModal({
   setModalVisibility,
 }) {
   const [stockInfo, setStockInfo] = useState({});
+  const [notes, setNotes] = useState("");
 
   const dispatch = useDispatch();
 
-  const onFavoriteClick = () => {
+  const onFavoriteClick = (e) => {
+    e.preventDefault();
     const savedStockInfo = {
       stockTicker: stockInfo.symbol,
       savedPrice: stockInfo.ask,
-      notes: "This is a note",
+      notes: notes,
     }; 
 
     dispatch(updateFavorite(savedStockInfo));
@@ -67,24 +69,30 @@ export default function SearchModal({
 
   return (
       <div className="modal-background">
-        <div className="modal">
-          <div>Stock Information:</div>
+        <form className="modal">
+          <div className="modal-heading">STOCK INFORMATION</div>
           <button
             className="close-btn"
             color="none"
             onClick={toggleModalVisibility}
           >X</button>
 
-          <h3>{stockInfo.symbol}</h3>
-          <div>{stockInfo.description}</div>
-          <div>Price: {stockInfo.ask}</div>
+          <h2>{stockInfo.symbol}</h2>
+          <div className="description">{stockInfo.description}</div>
+          
+          <div className="form-group">
+            <label htmlFor="notes"></label>
+            <input type="text" placeholder="Add a note" onChange={(e) => setNotes(e.target.value)}/>
+          </div>
+
+          <div>Current Price: ${stockInfo.ask}</div>
           <div>Day Change: {stockInfo.change_percentage}%</div>
           
           <DetailedView stockInfo={stockInfo}/>
           <button className="favorite-btn" onClick={onFavoriteClick}>
             Favorite
           </button>
-        </div>
+        </form>
       </div>
   );
 }
