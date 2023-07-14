@@ -4,7 +4,9 @@ This application is designed to view real-time data of stocks and track performa
 
 ## Technology Stack
 Backend: Express.js and Node.js
+
 Frontend: React and Redux
+
 Database: MongoDB
 
 ## Plans
