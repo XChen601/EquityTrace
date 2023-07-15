@@ -3,7 +3,7 @@ import { useSelector} from 'react-redux';
 import Search from '../components/Search';
 import FavoriteView from '../components/FavoriteView';
 import Footer from '../components/Footer';
-
+import TradeModal from '../components/TradeModal';
 
 function Dashboard() {
 
@@ -17,6 +17,7 @@ function Dashboard() {
 
       <Search />
       <FavoriteView />
+      <TradeModal />
       <Footer />
     </>
   );

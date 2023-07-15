@@ -3,6 +3,7 @@ import { deleteFavorite } from '../features/favorites/favoriteSlice'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {FiTrash} from 'react-icons/fi'
+import TradeComponent from './TradeModal';
 
 function FavoriteItem({ favorite }) {
   const [stockData, setStockData] = useState({})
@@ -40,15 +41,16 @@ function FavoriteItem({ favorite }) {
         <p className='description'>{stockData.description}</p>
         <h4>Current Price: <div>${stockData.ask}</div></h4>
         <h4>Price Movement: <div>{stockData.change_percentage}%</div></h4>
-
-
-        <h4>Saved Price: <div>${favorite.savedPrice}</div></h4>
         <h4>Notes: <div>{favorite.notes}</div></h4>      
         
+        <div className='trade-info'>
+          <h4>Shares Held: <div>68</div></h4>
+          <h4>Average Bought Price: <div>$15.90</div></h4>
+          <h4>Overall Performance: <div>{((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</div></h4>
+        </div>
         
-        <h4>Overall Performance: <div>{((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</div></h4>
-
         <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
+        <button className='trade'>Trade</button>
       </div>
     </div>
   )
