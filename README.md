@@ -1,6 +1,8 @@
 # StockTrace
 This application is designed to view real-time data of stocks and track performances of your favorite stocks. Below is an image of how it currently looks. <br>
-<img width="628" alt="image" src="https://github.com/XChen601/StockTrace/assets/72898664/3060a294-1b23-41ad-8935-2f237c2a98c6">
+![image](https://github.com/XChen601/StockTrace/assets/72898664/0921b29e-3eef-4491-9340-70960dbb1929)
+
+
 
 
 ## Technology Stack
