@@ -56,7 +56,7 @@ function FavoriteItem({ favorite }) {
         <div className='trade-info'>
           <h4>Shares Held: <div>{favorite.shares}</div></h4>
           <h4>Average Bought Price: <div>${favorite.averagePrice.toFixed(2)}</div></h4>
-          <h4>Overall Profit: <div>${(favorite.profit).toFixed(2)}</div></h4>
+          <RealizedProfit profit={favorite.profit} />
         </div>
         
         <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
@@ -64,6 +64,13 @@ function FavoriteItem({ favorite }) {
       </div>
     </div>
   )
+}
+
+const RealizedProfit = ({ profit }) => {
+  let formattedProfit = profit >= 0 ? `$${profit.toFixed(2)}` : `-$${Math.abs(profit).toFixed(2)}`;
+  return (
+      <h4>Realized Profit: <div>{formattedProfit}</div></h4>
+  );
 }
 
 export default FavoriteItem
