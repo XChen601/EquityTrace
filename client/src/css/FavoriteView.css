@@ -14,7 +14,7 @@
   border-radius: 8px;
   margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 400px;
+  min-width: 300px;
 }
 
 /* Styles for the favorite head component */
@@ -52,7 +52,7 @@
 .favorites h4 {
   margin: 5px 0;
   font-size: 1.1em;
-  font-weight: 600;
+  font-weight: 400;
   display: flex;
 }
 .favorites h4 div {
@@ -62,7 +62,7 @@
 }
 
 .favorites .item-footer {
-  font-size: .95em;
+  font-size: .85em;
   color: #2C7973;
 }
 

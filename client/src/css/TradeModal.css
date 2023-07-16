@@ -1,15 +1,17 @@
-.trade-modal {
+.modal-container {
   position: fixed;  /* Makes the modal fixed, it will stay in the same place even if the page is scrolled */
   top: 50%;           /* Positions the top edge of the modal at the top of the viewport */
-  left: 0;          /* Positions the left edge of the modal at the left of the viewport */
+  right: 0;          /* Positions the left edge of the modal at the left of the viewport */
   transform: translateY(-50%);  /* Offsets the modal upwards by half of its height so it's truly centered vertically */
   z-index: 1000;    /* Ensures the modal appears on top of other elements */
-  /* Other properties... */
-  border: 2px solid #FF7F50;  /* Adds a 2px border with your primary accent color */
+  /* Other properties... */  /* Adds a 2px border with your primary accent color */
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);  /* Adds a subtle shadow around the modal */
-  border-left: none;
 }
 
+.trade-modal {
+  border: 2px solid #FF7F50;
+  border-right: none;
+}
 .trade-modal form {
   background-color: #022859;
   padding: 20px;
@@ -72,13 +74,15 @@
   background-color: #FF7F50; /* Primary Accent Color */
   color: #D9D9D9;  /* Primary Text Color */
   border: none;
-  padding: 15px 5px; /* Adjust as needed */
+  padding: 20px 12px; /* Adjust as needed */
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   transition-duration: 0.4s;
   cursor: pointer;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .show-modal-btn:hover {

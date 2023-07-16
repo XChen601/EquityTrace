@@ -13,13 +13,21 @@ const favoriteSchema = new mongoose.Schema(
       required: true,
       uppercase: true,
     },
-    savedPrice: {
-      type: Number,
-      required: true,
-    },
     notes: {
       type: String,
       default: "",
+    },
+    shares: {
+      type: Number,
+      default: 0,
+    },
+    profit: {
+      type: Number,
+      default: 0,
+    },
+    averagePrice: {
+      type: Number,
+      default: 0,
     },
   },
   {

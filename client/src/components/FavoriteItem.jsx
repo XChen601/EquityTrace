@@ -16,8 +16,8 @@ function FavoriteItem({ favorite }) {
     }
     dispatch(setTradeModal(tradeInfo))
     dispatch(openTradeModal())
-
   }
+
 
   const fetchStockData = async () => {
     const tradierToken = process.env.REACT_APP_TRADIER_TOKEN;
@@ -54,9 +54,9 @@ function FavoriteItem({ favorite }) {
         <h4>Notes: <div>{favorite.notes}</div></h4>      
         
         <div className='trade-info'>
-          <h4>Shares Held: <div>68</div></h4>
-          <h4>Average Bought Price: <div>$15.90</div></h4>
-          <h4>Overall Performance: <div>{((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</div></h4>
+          <h4>Shares Held: <div>{favorite.shares}</div></h4>
+          <h4>Average Bought Price: <div>${favorite.averagePrice.toFixed(2)}</div></h4>
+          <h4>Overall Profit: <div>${(favorite.profit).toFixed(2)}</div></h4>
         </div>
         
         <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>

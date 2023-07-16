@@ -2,7 +2,6 @@
 import { useSelector} from 'react-redux';
 import Search from '../components/Search';
 import FavoriteView from '../components/FavoriteView';
-import Footer from '../components/Footer';
 import TradeModal from '../components/TradeModal';
 
 function Dashboard() {
@@ -10,7 +9,7 @@ function Dashboard() {
   const {user} = useSelector((state) => state.auth)
 
   return (
-    <>
+    <div className='main-content'>
       <section className='heading'>
         <h1>Welcome <div className='username'>{user ? user.name : "Stranger"}</div></h1>
       </section>
@@ -18,8 +17,7 @@ function Dashboard() {
       <Search />
       <FavoriteView />
       <TradeModal />
-      <Footer />
-    </>
+    </div>
   );
 }
 
