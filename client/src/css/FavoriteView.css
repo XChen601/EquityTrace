@@ -78,4 +78,11 @@ h4 {
   justify-content: space-between;
 }
 
-/* Trade Component */
+.trade {
+  background-color: #FF7F50;
+  color: #021B33;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  cursor: pointer;
+}

@@ -3,11 +3,21 @@ import { deleteFavorite } from '../features/favorites/favoriteSlice'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {FiTrash} from 'react-icons/fi'
-import TradeComponent from './TradeModal';
+import { openTradeModal, setTradeModal } from '../features/tradeModalSlice';
 
 function FavoriteItem({ favorite }) {
   const [stockData, setStockData] = useState({})
   const dispatch = useDispatch()
+
+  const onTradeClick = () => {
+    const tradeInfo = {
+      symbol: favorite.stockTicker,
+      price: stockData.ask
+    }
+    dispatch(setTradeModal(tradeInfo))
+    dispatch(openTradeModal())
+
+  }
 
   const fetchStockData = async () => {
     const tradierToken = process.env.REACT_APP_TRADIER_TOKEN;
@@ -50,7 +60,7 @@ function FavoriteItem({ favorite }) {
         </div>
         
         <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
-        <button className='trade'>Trade</button>
+        <button className='trade' onClick={onTradeClick}>Trade</button>
       </div>
     </div>
   )

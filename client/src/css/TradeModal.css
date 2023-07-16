@@ -67,3 +67,21 @@
 .exit-btn:hover {
   background-color: #FFA877; /* Highlight color when you hover over the button */
 }
+
+.show-modal-btn {
+  background-color: #FF7F50; /* Primary Accent Color */
+  color: #D9D9D9;  /* Primary Text Color */
+  border: none;
+  padding: 15px 5px; /* Adjust as needed */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.show-modal-btn:hover {
+  background-color: #FFA877; /* Highlight Color */
+  color: #021B33;  /* Primary Background (Very Dark Shade) */
+}
