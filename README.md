@@ -13,8 +13,4 @@ Frontend: React
 
 Database: MongoDB
 
-## Plans
-Stock Transactions: Allow users to buy and sell stocks within the application. <br>
-Performance and Profit Tracking: Enable users to track their investment performance and calculate profit or loss. <br>
-
 
