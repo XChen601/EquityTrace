@@ -23,6 +23,8 @@ export default function SearchModal({
       stockTicker: stockInfo.symbol,
       savedPrice: stockInfo.ask,
       notes: notes,
+      shares: 0,
+      price: 0,
     }; 
 
     dispatch(updateFavorite(savedStockInfo));

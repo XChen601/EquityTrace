@@ -3,10 +3,21 @@ import { deleteFavorite } from '../features/favorites/favoriteSlice'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {FiTrash} from 'react-icons/fi'
+import { openTradeModal, setTradeModal } from '../features/tradeModalSlice';
 
 function FavoriteItem({ favorite }) {
   const [stockData, setStockData] = useState({})
   const dispatch = useDispatch()
+
+  const onTradeClick = () => {
+    const tradeInfo = {
+      symbol: favorite.stockTicker,
+      price: stockData.ask
+    }
+    dispatch(setTradeModal(tradeInfo))
+    dispatch(openTradeModal())
+  }
+
 
   const fetchStockData = async () => {
     const tradierToken = process.env.REACT_APP_TRADIER_TOKEN;
@@ -40,15 +51,16 @@ function FavoriteItem({ favorite }) {
         <p className='description'>{stockData.description}</p>
         <h4>Current Price: <div>${stockData.ask}</div></h4>
         <h4>Price Movement: <div>{stockData.change_percentage}%</div></h4>
-
-
-        <h4>Saved Price: <div>${favorite.savedPrice}</div></h4>
         <h4>Notes: <div>{favorite.notes}</div></h4>      
         
+        <div className='trade-info'>
+          <h4>Shares Held: <div>{favorite.shares}</div></h4>
+          <h4>Average Bought Price: <div>${favorite.averagePrice.toFixed(2)}</div></h4>
+          <h4>Overall Profit: <div>${(favorite.profit).toFixed(2)}</div></h4>
+        </div>
         
-        <h4>Overall Performance: <div>{((stockData.ask - favorite.savedPrice)/favorite.savedPrice * 100).toFixed(2)}%</div></h4>
-
         <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
+        <button className='trade' onClick={onTradeClick}>Trade</button>
       </div>
     </div>
   )

@@ -19,17 +19,75 @@ const setFavorite = asyncHandler(async (req, res) => {
   res.json(favorite);
 });
 
+const getNewAveragePrice = async (
+  oldData,
+  incrementShares,
+  price,
+  transactionType
+) => {
+  let newAveragePrice = price;
+  if (oldData && transactionType === "BUY") {
+    const newShares = oldData.shares + incrementShares;
+    newAveragePrice =
+      (oldData.averagePrice * oldData.shares + price * incrementShares) /
+      newShares;
+  } else if (oldData && transactionType === "SELL") {
+    newAveragePrice = oldData.averagePrice;
+  }
+  return newAveragePrice;
+};
+
+const getIncrementShares = (transactionType, shares) => {
+  if (transactionType === "BUY") {
+    return shares;
+  } else if (transactionType === "SELL") {
+    return -shares;
+  }
+  return 0;
+};
+
 const updateFavorite = asyncHandler(async (req, res) => {
-  console.log("req" + req.body.stockTicker);
-  console.log("test");
+  const oldData = await Favorite.findOne({
+    stockTicker: req.body.stockTicker,
+    user: req.user.id,
+  });
+
+  const incrementShares = getIncrementShares(
+    req.body.transactionType,
+    req.body.shares
+  );
+
+  // calculate profit
+  let incrementProfit;
+  if (req.body.transactionType === "SELL") {
+    incrementProfit = req.body.shares * (req.body.price - oldData.averagePrice); // Add profit if it's a "sell" transaction
+  } else {
+    incrementProfit = 0;
+  }
+
+  // calculate new average price
+
+  const newAveragePrice = await getNewAveragePrice(
+    oldData,
+    incrementShares,
+    req.body.price,
+    req.body.transactionType
+  );
+  console.log("average price: " + newAveragePrice);
+
   const updatedFavorite = await Favorite.findOneAndUpdate(
     { stockTicker: req.body.stockTicker, user: req.user.id },
     {
       $set: {
+        user: req.user.id,
         stockTicker: req.body.stockTicker,
         savedPrice: req.body.savedPrice,
         notes: req.body.notes,
-        user: req.user.id,
+        averagePrice: newAveragePrice,
+      },
+      $inc: {
+        shares: incrementShares,
+        profit: incrementProfit,
       },
       $currentDate: {
         createdAt: { $setOnInsert: new Date() },
@@ -43,7 +101,6 @@ const updateFavorite = asyncHandler(async (req, res) => {
   );
 
   console.log(updatedFavorite._id);
-  const favorite = await Favorite.findOne({ _id: updatedFavorite._id });
   res.json(updatedFavorite);
 });
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SearchModal from "./SearchModal";
 import "../css/Search.css";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function Search() {
   const [searchText, setSearchText] = useState("");
@@ -10,6 +11,13 @@ export default function Search() {
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const toggleModalVisibility = () => setModalVisibility(!modalVisibility);
+  const handleSearchClick = () => {
+    setClickedSymbol(searchText);
+    setSearchText("");
+    setSymbolList([]);
+    toggleModalVisibility();
+  };
+
   const handleEnterKey = (event) => {
     if (event.key === 'Enter') {
         setClickedSymbol(searchText);
@@ -93,14 +101,18 @@ export default function Search() {
   return (
     <>
       <div className="search-section">
-        <div className="search-box">
-          <input
-            type="text"
-            value={searchText}
-            onChange={handleInputChange}
-            placeholder="Search for a stock"
-            onKeyUp={handleEnterKey}
-          />
+        <div className="search-content">
+          <div className="search-box">
+            <input
+              type="text"
+              value={searchText}
+              onChange={handleInputChange}
+              placeholder="Search for a stock"
+              onKeyUp={handleEnterKey}
+            />
+            <button className="search-button" onClick={handleSearchClick}><AiOutlineSearch /></button>
+          </div>
+          
           <div className="list-container">
             {searchListVisibility && (
               <div className="symbol-list">
