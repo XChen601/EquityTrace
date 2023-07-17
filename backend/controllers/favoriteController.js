@@ -25,6 +25,9 @@ const getNewAveragePrice = async (
   price,
   transactionType
 ) => {
+  console.log("shares" + incrementShares);
+  console.log("price" + price);
+  console.log("transactionType" + transactionType);
   let newAveragePrice = price;
   if (oldData && transactionType === "BUY") {
     const newShares = oldData.shares + incrementShares;
@@ -32,6 +35,8 @@ const getNewAveragePrice = async (
       (oldData.averagePrice * oldData.shares + price * incrementShares) /
       newShares;
   } else if (oldData && transactionType === "SELL") {
+    newAveragePrice = oldData.averagePrice;
+  } else if (oldData && !transactionType) {
     newAveragePrice = oldData.averagePrice;
   }
   return newAveragePrice;
