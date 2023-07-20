@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export default function DetailedView ({stockInfo}) {
-  const [buttonText, setButtonText] = useState("Show More");
-  const [showDetailed, setShowDetailed] = useState(false);
+  const [buttonText, setButtonText] = useState("Show Less");
+  const [showDetailed, setShowDetailed] = useState(true);
 
   const handleClick = (event) => {
     event.preventDefault();

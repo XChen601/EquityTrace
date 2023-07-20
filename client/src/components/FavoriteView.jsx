@@ -25,6 +25,13 @@ function FavoriteView() {
     }
   }, [user, navigate, isError, message, dispatch])
 
+
+  // check if user is logged in
+  if (!user) {
+    return(
+      <h3 className='empty'>Register or login to save stocks!</h3>
+    )
+  }
   if (isLoading) {
     return <Spinner />
   }
