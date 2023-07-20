@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Spinner from '../components/Spinner';
+import Loading from './Loading';
 import { getFavorites, reset } from '../features/favorites/favoriteSlice';
 import FavoriteItem from '../components/FavoriteItem';
 import '../css/FavoriteView.css'
@@ -33,7 +33,7 @@ function FavoriteView() {
     )
   }
   if (isLoading) {
-    return <Spinner />
+    return <Loading />
   }
   return (
     <section className='content'>

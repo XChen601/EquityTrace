@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import Loading from '../components/Loading'
 import '../css/LoginRegister.css'
 
 function Login() {
@@ -53,7 +53,7 @@ function Login() {
   }
 
   if (isLoading) {
-    return <Spinner />
+    return <Loading />
   }
 
   return (

@@ -1,6 +1,6 @@
 import {CgSpinnerTwoAlt} from 'react-icons/cg'
 
-function Spinner() {
+function Loading() {
   return (
     <div className="loadingSpinnerContainer">
       <div className="loadingSpinner"><CgSpinnerTwoAlt /></div>
@@ -8,4 +8,4 @@ function Spinner() {
   )
 }
 
-export default Spinner
+export default Loading
