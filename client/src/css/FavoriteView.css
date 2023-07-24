@@ -9,8 +9,7 @@
 .favorite {
   position: relative;
   padding: 25px;
-  background-color: #022859;
-  color: #D9D9D9;
+  background-color: var(--secondary-bg);
   border-radius: 8px;
   margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -26,7 +25,6 @@
 }
 
 .favorite-head h2 {
-  color: #D9D9D9;
   margin: 0;
   font-size: 1.4em;
 }
@@ -34,7 +32,7 @@
 .description {
   font-size: .9em;
   margin: 0 0 20px 0;
-  color: #898989;
+  color: var(--secondary-text);
 }
 
 /* Styles for the close button */
@@ -63,11 +61,10 @@
 
 .favorites .item-footer {
   font-size: .85em;
-  color: #2C7973;
+  color: var(--secondary-accent);
 }
 
 .empty {
-  color: #D9D9D9;
   display: flex;
   justify-content: center;
   margin: 5% 0;
@@ -79,10 +76,11 @@ h4 {
 }
 
 .trade {
-  background-color: #FF7F50;
-  color: #021B33;
+  background-color: var(--primary-accent);
+  color: var(--primary-bg);
   border: none;
   border-radius: 3px;
   padding: 10px 20px;
   cursor: pointer;
+  margin-top: 15px;
 }

@@ -59,8 +59,9 @@ function FavoriteItem({ favorite }) {
           <RealizedProfit profit={favorite.profit} />
         </div>
         
-        <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
+        
         <button className='trade' onClick={onTradeClick}>Trade</button>
+        <div className='item-footer'>Last Updated: {new Date(favorite.createdAt).toLocaleDateString("en-US")}</div>
       </div>
     </div>
   )
