@@ -16,9 +16,9 @@
   padding: 10px;
   box-sizing: border-box;
   border-radius: 4px;
-  border: 2px solid #2C7973;
-  color: #D9D9D9;
-  background-color: #021B33;
+  border: 2px solid var(--secondary-accent);
+  color: var(--primary-text);
+  background-color: var(--primary-bg);
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   border-right: 0px;
@@ -28,8 +28,8 @@
 .list-container {
   position: absolute;
   width: 100%;
-  background-color: #022859;
-  border: 1px solid #2C7973;
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--secondary-accent);
   border-radius: 4px;
   margin-top: 5px;
   max-height: 200px;
@@ -47,13 +47,12 @@
 /* Styles for the symbol item */
 .symbol-item {
   padding: 10px;
-  color: #D9D9D9;
   cursor: pointer;
 }
 
 .symbol-item:hover {
-  background-color: #2C7973;
-  color: #021B33;
+  background-color: var(--secondary-accent);
+  color: var(--primary-bg);
 }
 
 .search-box {
@@ -85,6 +84,6 @@
 }
 
 .search-button svg {
-  fill: #021B33; /* Make the SVG color contrast with the button */
-  stroke: #021B33; /* Same for the SVG stroke */
+  fill: #021B33;
+  stroke: #021B33; 
 }

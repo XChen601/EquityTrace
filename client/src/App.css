@@ -1,6 +1,11 @@
 body {
-  background-color: #021B33;
+  background-color: var(--primary-bg);
   color: var(--primary-text);
+  font-family: var(--secondary-font);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--primary-font);
 }
 
 .container {
@@ -19,12 +24,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #022859;
+  background-color: var(--secondary-bg);
 }
 
 /* Styles for the logo */
 .logo a {
-  color: #D9D9D9;
+  color: var(--primary-font);
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
@@ -46,7 +51,7 @@ body {
 
 /* Styles for the button */
 .btn {
-  background-color: #FF7F50;
+  background-color: var(--primary-accent);
   color: #D9D9D9;
   border: none;
   padding: 10px 20px;
@@ -67,25 +72,21 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  color: #D9D9D9;
 }
 
-/* Styles for the heading */
 .heading h1 {
   font-size: 2em;
   margin: 0;
 }
 
-/* Styles for the username */
 .username {
   font-weight: bold;
-  color: #FF7F50;
+  color: var(--primary-accent);
   display: inline; /* To keep the username on the same line as the greeting */
 }
 
-/* Styles for the footer */
 .footer {
-  background-color: #022859;
+  background-color: var(--secondary-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -96,22 +97,18 @@ body {
   display: flex;
   align-items: center;
 }
-/* Styles for the links */
+
 .footer a {
-  color: #D9D9D9;
+  color: var(--primary-text);
   text-decoration: none;
   margin: 0 15px;
   font-size: 30px;
 }
 
-/* Styles for the copyright */
 .copyright {
-  color: #D9D9D9;
   font-size: 0.8em;
 }
 
-
-/* Loading spinner */
 .loadingSpinnerContainer {
   display: flex;
   justify-content: center;
