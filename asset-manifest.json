@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/equitytrace/static/css/main.8106ddb9.css",
-    "main.js": "/equitytrace/static/js/main.dfd9630c.js",
-    "index.html": "/equitytrace/index.html",
-    "main.8106ddb9.css.map": "/equitytrace/static/css/main.8106ddb9.css.map",
-    "main.dfd9630c.js.map": "/equitytrace/static/js/main.dfd9630c.js.map"
+    "main.css": "/StockTrace/static/css/main.8106ddb9.css",
+    "main.js": "/StockTrace/static/js/main.dfd9630c.js",
+    "index.html": "/StockTrace/index.html",
+    "main.8106ddb9.css.map": "/StockTrace/static/css/main.8106ddb9.css.map",
+    "main.dfd9630c.js.map": "/StockTrace/static/js/main.dfd9630c.js.map"
   },
   "entrypoints": [
     "static/css/main.8106ddb9.css",
