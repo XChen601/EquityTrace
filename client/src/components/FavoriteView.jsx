@@ -20,9 +20,6 @@ function FavoriteView() {
 
     dispatch(getFavorites())
 
-    return () => {
-      dispatch(reset())
-    }
   }, [user, navigate, isError, message, dispatch])
 
 
