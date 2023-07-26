@@ -2,6 +2,7 @@
 
 ## Description
 A fullstack MERN application that allows the user to view details of stocks, trade stocks, and track stock trading performance.
+
 <img width="500" alt="image" src="https://github.com/XChen601/StockTrace/assets/72898664/afa398ac-2253-4b78-a61a-04e4e3f109fd">
 
 ## Technology Stack
