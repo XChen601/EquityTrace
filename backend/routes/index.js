@@ -12,3 +12,5 @@ router.get("/users", userController.getAllUsers);
 router.get("/users/:userId", userController.getUserById);
 
 module.exports = router;
+
+// this file does nothing rn
