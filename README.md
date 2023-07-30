@@ -33,3 +33,6 @@ Database: MongoDB
 <br>
 <img width="176" alt="image" src="https://github.com/XChen601/StockTrace/assets/72898664/46a6a153-8462-4832-ac9b-0383615e0303">
 
+# Old Versions
+<img width="958" alt="image" src="https://github.com/XChen601/StockTrace/assets/72898664/2db2ab78-244d-4e77-9945-c39096e9d1c7">
+
