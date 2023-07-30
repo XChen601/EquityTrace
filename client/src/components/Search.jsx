@@ -54,6 +54,8 @@ export default function Search() {
 
     try {
       const tradierToken = process.env.REACT_APP_TRADIER_TOKEN;
+      console.log(tradierToken[0])
+      console.log("TESTTTT")
       const response = await fetch(
         `https://api.tradier.com/v1/markets/lookup?q=${searchString}`,
         {
