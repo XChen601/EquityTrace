@@ -8,6 +8,13 @@ connectDB();
 
 const app = express();
 
+// CORS configuration
+app.use(
+  cors({
+    origin: "https://main--jade-duckanoo-a628d6.netlify.app",
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
