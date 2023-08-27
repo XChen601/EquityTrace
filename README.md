@@ -6,7 +6,7 @@ A fullstack MERN application that allows the user to view details of stocks, tra
 <img width="500" alt="image" src="https://github.com/XChen601/StockTrace/assets/72898664/afa398ac-2253-4b78-a61a-04e4e3f109fd">
 
 ## Technology Stack
-Backend: Express.js and Node.js - Deployed with Render
+Backend: Express.js and Node.js - Deployed with Render ([Website Here](https://main--jade-duckanoo-a628d6.netlify.app/) First load takes time as server is sleep when inactive)
 
 Frontend: React, Redux - Deployed with Netlify
 
