@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter a password"],
     },
+    // not yet implemented
     savedStocks: [
       {
         type: mongoose.Schema.Types.ObjectId,

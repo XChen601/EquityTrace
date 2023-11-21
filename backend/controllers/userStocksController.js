@@ -1,31 +1,28 @@
 const asyncHandler = require("express-async-handler");
 
-const Favorite = require("../models/favorite");
+const UserStocks = require("../models/userStocks");
 
-const getFavorites = asyncHandler(async (req, res) => {
-  const favorites = await Favorite.find({ user: req.user.id });
-  res.json(favorites);
+const getUserStocks = asyncHandler(async (req, res) => {
+  const userStocks = await UserStocks.find({ user: req.user.id });
+  res.json(userStocks);
 });
 
-const setFavorite = asyncHandler(async (req, res) => {
-  const favorite = await Favorite.create({
+const setUserStock = asyncHandler(async (req, res) => {
+  const userStock = await UserStocks.create({
     stockTicker: req.body.stockTicker,
     savedPrice: req.body.savedPrice,
     notes: req.body.notes,
     user: req.user.id,
   });
-  res.json(favorite);
+  res.json(userStock);
 });
 
-const getNewAveragePrice = async (
+const getNewAveragePrice = (
   oldData,
   incrementShares,
   price,
   transactionType
 ) => {
-  console.log("shares" + incrementShares);
-  console.log("price" + price);
-  console.log("transactionType" + transactionType);
   let newAveragePrice = price;
   if (oldData && transactionType === "BUY") {
     const newShares = oldData.shares + incrementShares;
@@ -50,8 +47,8 @@ const getIncrementShares = (transactionType, shares) => {
 };
 
 // updates profit, average price, 
-const updateFavorite = asyncHandler(async (req, res) => {
-  const oldData = await Favorite.findOne({
+const updateUserStock = asyncHandler(async (req, res) => {
+  const oldData = await UserStocks.findOne({
     stockTicker: req.body.stockTicker,
     user: req.user.id,
   });
@@ -70,15 +67,14 @@ const updateFavorite = asyncHandler(async (req, res) => {
   }
 
   // calculate new average price
-  const newAveragePrice = await getNewAveragePrice(
+  const newAveragePrice = getNewAveragePrice(
     oldData,
     incrementShares,
     req.body.price,
     req.body.transactionType
   );
-  console.log("average price: " + newAveragePrice);
 
-  const updatedFavorite = await Favorite.findOneAndUpdate(
+  const updatedUserStock = await UserStocks.findOneAndUpdate(
     { stockTicker: req.body.stockTicker, user: req.user.id },
     {
       $set: {
@@ -103,16 +99,15 @@ const updateFavorite = asyncHandler(async (req, res) => {
     }
   );
 
-  console.log(updatedFavorite._id);
-  res.json(updatedFavorite);
+  res.json(updatedUserStock);
 });
 
-const deleteFavorite = asyncHandler(async (req, res) => {
-  const favorite = await Favorite.findById(req.params.id);
+const deleteUserStock = asyncHandler(async (req, res) => {
+  const userStock = await UserStocks.findById(req.params.id);
 
-  if (!favorite) {
+  if (!userStock) {
     res.status(404);
-    throw new Error("Favorite not found");
+    throw new Error("Stock not found");
   }
 
   // check for user
@@ -121,19 +116,19 @@ const deleteFavorite = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  if (favorite.user.toString() !== req.user.id) {
+  if (userStock.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
 
-  await favorite.deleteOne();
+  await userStock.remove();
 
   res.json({ id: req.params.id });
 });
 
 module.exports = {
-  getFavorites,
-  setFavorite,
-  updateFavorite,
-  deleteFavorite,
+  getUserStocks,
+  setUserStock,
+  updateUserStock,
+  deleteUserStock,
 };
