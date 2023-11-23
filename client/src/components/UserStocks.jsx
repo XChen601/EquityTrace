@@ -38,11 +38,11 @@ function UserStocks() {
           {userStocks.map((stock) => (
             <UserStockItem key={stock.id} stock={stock} />
           ))}
+          <p id="totalProfit">Total Profit: ${totalProfit}</p>
         </div>
       ) : (
         <h3 className='empty'>You have no stocks saved</h3>
       )}
-      <p id="totalProfit">Total Profit: ${totalProfit}</p>
     </section>
   );
 }
