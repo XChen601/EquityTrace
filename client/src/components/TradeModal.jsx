@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../css/TradeModal.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeTradeModal, openTradeModal } from '../features/tradeModalSlice'
-import { updateFavorite } from '../features/favorites/favoriteSlice'
+import { updateUserStock } from '../features/userStocks/userStocksSlice'
 
 function TradeModal() {
   const dispatch = useDispatch()
@@ -40,9 +40,9 @@ function TradeModal() {
       stockTicker: formValues.symbol,
       shares: formValues.quantity,
       price: formValues.price,
-    }; 
+    };
 
-    dispatch(updateFavorite(savedStockInfo));
+    dispatch(updateUserStock(savedStockInfo));
   }
   // if user not logged in, show nothing
   const {user} = useSelector((state) => state.auth)
@@ -92,7 +92,7 @@ function TradeModal() {
       </form>
     </div>
     </div>
-    
+
   )
 }
 
