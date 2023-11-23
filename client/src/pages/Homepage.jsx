@@ -3,6 +3,7 @@ import { useSelector} from 'react-redux';
 import Search from '../components/Search';
 import UserStocks from '../components/UserStocks';
 import TradeModal from '../components/TradeModal';
+import RandomStocks from '../components/RandomStocks';
 
 function Homepage() {
 
@@ -16,6 +17,7 @@ function Homepage() {
 
       <Search />
       <UserStocks />
+      <RandomStocks />
       <TradeModal />
     </div>
   );

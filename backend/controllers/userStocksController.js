@@ -126,6 +126,31 @@ const deleteUserStock = asyncHandler(async (req, res) => {
   res.json({ id: req.params.id });
 });
 
+const changeNote = asyncHandler(async (req, res) => {
+  const note = req.body.note;
+  const userStock = await UserStocks.findById(req.params.id);
+
+  if (!userStock) {
+    res.status(404);
+    throw new Error("Stock not found");
+  }
+
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  if (userStock.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
+  userStock.notes = note;
+  await userStock.save();
+
+  res.json(userStock);
+});
+
 module.exports = {
   getUserStocks,
   setUserStock,

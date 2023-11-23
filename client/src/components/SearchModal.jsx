@@ -88,11 +88,6 @@ export default function SearchModal({
           <h2>{stockInfo.symbol}</h2>
           <div className="description">{stockInfo.description}</div>
 
-          <div className="form-group">
-            <label htmlFor="notes"></label>
-            <input type="text" placeholder="Add a note" onChange={(e) => setNotes(e.target.value)}/>
-          </div>
-
           <div>Current Price: ${stockInfo.ask}</div>
           <div>Day Change: {stockInfo.change_percentage}%</div>
 

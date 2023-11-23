@@ -84,3 +84,8 @@ h4 {
   cursor: pointer;
   margin-top: 15px;
 }
+
+#totalProfit {
+  display: flex;
+  justify-content: center;
+}
