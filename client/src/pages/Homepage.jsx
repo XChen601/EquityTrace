@@ -1,7 +1,7 @@
 
 import { useSelector} from 'react-redux';
 import Search from '../components/Search';
-import FavoriteView from '../components/FavoriteView';
+import UserStocks from '../components/UserStocks';
 import TradeModal from '../components/TradeModal';
 
 function Homepage() {
@@ -15,7 +15,7 @@ function Homepage() {
       </section>
 
       <Search />
-      <FavoriteView />
+      <UserStocks />
       <TradeModal />
     </div>
   );

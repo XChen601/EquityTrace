@@ -1,34 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import favoriteService from "./favoriteService";
+import userStocksService from "./userStocksService";
 
 const initialState = {
-  favorites: [],
+  userStocks: [],
   isLoading: false,
   isError: false,
   isSuccess: false,
   message: "",
 };
 
-// Check if favorite in favorites
-export const checkFavorite = createAsyncThunk(
-  "favorites/check",
+// Check if stock in user's stocks list
+export const checkUserStock = createAsyncThunk(
+  "userStocks/check",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await favoriteService.checkFavorite(id, token);
+      return await userStocksService.checkUserStock(id, token);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-// Create new favorite
-export const createFavorite = createAsyncThunk(
-  "favorites/create",
-  async (favoriteData, thunkAPI) => {
+// add new stock
+export const createUserStock = createAsyncThunk(
+  "userStocks/create",
+  async (stockData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await favoriteService.createFavorite(favoriteData, token);
+      return await userStocksService.createUserStock(stockData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -41,13 +41,13 @@ export const createFavorite = createAsyncThunk(
   }
 );
 
-// Update favorite or create new favorite
-export const updateFavorite = createAsyncThunk(
-  "favorites/update",
-  async (favoriteData, thunkAPI) => {
+// Update a user's stock
+export const updateUserStock = createAsyncThunk(
+  "userStocks/update",
+  async (stockData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await favoriteService.updateFavorite(favoriteData, token);
+      return await userStocksService.updateUserStock(stockData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -60,13 +60,13 @@ export const updateFavorite = createAsyncThunk(
   }
 );
 
-// Get all user favorites
-export const getFavorites = createAsyncThunk(
-  "favorites/getAll",
+// Get all user stocks
+export const getUserStocks = createAsyncThunk(
+  "userStocks/getAll",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await favoriteService.getFavorites(token);
+      return await userStocksService.getUserStocks(token);
     } catch (error) {
       const message =
         (error.response &&
@@ -79,13 +79,13 @@ export const getFavorites = createAsyncThunk(
   }
 );
 
-// Delete user favorite
-export const deleteFavorite = createAsyncThunk(
-  "favorites/delete",
+// Delete a user stock
+export const deleteUserStock = createAsyncThunk(
+  "userStocks/delete",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await favoriteService.deleteFavorite(id, token);
+      return await userStocksService.deleteUserStock(id, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -98,73 +98,64 @@ export const deleteFavorite = createAsyncThunk(
   }
 );
 
-export const favoriteSlice = createSlice({
-  name: "favorite",
+export const userStocksSlice = createSlice({
+  name: "userStock",
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createFavorite.pending, (state) => {
+      .addCase(createUserStock.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createFavorite.fulfilled, (state, action) => {
+      .addCase(createUserStock.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.favorites.push(action.payload);
+        state.userStocks.push(action.payload);
       })
-      .addCase(createFavorite.rejected, (state, action) => {
+      .addCase(createUserStock.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(getFavorites.pending, (state) => {
+      .addCase(getUserStocks.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getFavorites.fulfilled, (state, action) => {
+      .addCase(getUserStocks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.favorites = action.payload;
+        state.userStocks = action.payload;
       })
-      .addCase(getFavorites.rejected, (state, action) => {
+      .addCase(getUserStocks.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(deleteFavorite.pending, (state) => {
+      .addCase(deleteUserStock.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteFavorite.fulfilled, (state, action) => {
+      .addCase(deleteUserStock.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.favorites = state.favorites.filter(
-          (favorite) => favorite._id !== action.payload.id
+        state.userStocks = state.userStocks.filter(
+          (stock) => stock._id !== action.payload.id
         );
       })
-      .addCase(deleteFavorite.rejected, (state, action) => {
+      .addCase(deleteUserStock.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         console.log(action.payload);
       })
-      .addCase(updateFavorite.pending, (state) => {
+      .addCase(updateUserStock.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateFavorite.fulfilled, (state, action) => {
+      .addCase(updateUserStock.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // check if favorite already exists
-        const index = state.favorites.findIndex(
-          (favorite) => favorite._id === action.payload._id
-        );
-        if (index !== -1) {
-          state.favorites[index] = action.payload;
-        } else {
-          state.favorites.push(action.payload);
-        }
       })
-      .addCase(updateFavorite.rejected, (state, action) => {
+      .addCase(updateUserStock.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -172,5 +163,5 @@ export const favoriteSlice = createSlice({
   },
 });
 
-export const { reset } = favoriteSlice.actions;
-export default favoriteSlice.reducer;
+export const { reset } = userStocksSlice.actions;
+export default userStocksSlice.reducer;

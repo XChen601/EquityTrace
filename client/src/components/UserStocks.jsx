@@ -2,15 +2,15 @@ import {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from './Loading';
-import { getFavorites, reset } from '../features/favorites/favoriteSlice';
-import FavoriteItem from '../components/FavoriteItem';
+import { getUserStocks, reset } from '../features/userStocks/userStocksSlice';
+import StockItem from './StockItem';
 import '../css/FavoriteView.css'
 
-function FavoriteView() {
+function UserStocks() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
-  const {favorites, isLoading, isError, message} = useSelector((state) => state.favorites)
+
+  const {userStocks, isLoading, isError, message} = useSelector((state) => state.userStocks)
   const {user} = useSelector((state) => state.auth)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function FavoriteView() {
       console.log(message)
     }
 
-    dispatch(getFavorites())
+    dispatch(getUserStocks())
 
   }, [user, navigate, isError, message, dispatch])
 
@@ -34,15 +34,15 @@ function FavoriteView() {
   }
   return (
     <section className='content'>
-        {favorites.length > 0 ? (
+        {userStocks.length > 0 ? (
           <div className='favorites'>
-            {favorites.map((favorite) => (
-              <FavoriteItem key={favorite.id} favorite={favorite} />
+            {userStocks.map((stock) => (
+              <StockItem key={stock.id} stock={stock} />
             ))}
           </div>
-        ) : (<h3 className='empty'>You have no favorites</h3>)}
+        ) : (<h3 className='empty'>You have no stocks saved</h3>)}
       </section>
   )
 }
 
-export default FavoriteView
+export default UserStocks

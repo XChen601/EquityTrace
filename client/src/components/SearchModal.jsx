@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 //import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
 import {  useDispatch } from "react-redux";
-import {updateFavorite} from "../features/favorites/favoriteSlice";
+import { updateUserStock } from "../features/userStocks/userStocksSlice";
 import "../css/SearchModal.css";
 import DetailedView from "./DetailedView";
-import {MDBModal} from 'mdb-react-ui-kit' 
+import {MDBModal} from 'mdb-react-ui-kit'
 
 export default function SearchModal({
   stockName,
@@ -17,7 +17,7 @@ export default function SearchModal({
 
   const dispatch = useDispatch();
 
-  const onFavoriteClick = (e) => {
+  const onSave = (e) => {
     e.preventDefault();
     const savedStockInfo = {
       stockTicker: stockInfo.symbol,
@@ -25,9 +25,9 @@ export default function SearchModal({
       notes: notes,
       shares: 0,
       price: 0,
-    }; 
+    };
 
-    dispatch(updateFavorite(savedStockInfo));
+    dispatch(updateUserStock(savedStockInfo));
   };
 
   const setNotFound = () => {
@@ -81,7 +81,7 @@ export default function SearchModal({
 
           <h2>{stockInfo.symbol}</h2>
           <div className="description">{stockInfo.description}</div>
-          
+
           <div className="form-group">
             <label htmlFor="notes"></label>
             <input type="text" placeholder="Add a note" onChange={(e) => setNotes(e.target.value)}/>
@@ -89,10 +89,10 @@ export default function SearchModal({
 
           <div>Current Price: ${stockInfo.ask}</div>
           <div>Day Change: {stockInfo.change_percentage}%</div>
-          
+
           <DetailedView stockInfo={stockInfo}/>
-          <button className="favorite-btn" onClick={onFavoriteClick}>
-            Favorite
+          <button className="favorite-btn" onClick={onSave}>
+            Save
           </button>
         </form>
       </div>
