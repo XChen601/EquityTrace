@@ -18,8 +18,7 @@ const StockInfo = ({ symbol }) => {
       }
     );
     const data = await response.json();
-    const stockInfo = data.quotes.quote;
-    setStockData(stockInfo)
+    setStockData(data.quotes.quote)
   }
 
   useEffect(() => {
@@ -27,10 +26,19 @@ const StockInfo = ({ symbol }) => {
   }, [])
 
   return (
+<div className="favorite">
       <div>
+        <div className='favorite-head'>
           <h2>{symbol}</h2>
-          {/* Display your stock data here */}
+        </div>
+        <p className='description'>{stockData.description}</p>
+        <h4>Current Price: <div>${stockData.ask}</div></h4>
+        <h4>Price Movement: <div>{stockData.change_percentage}%</div></h4>
+        <h4>Volume: <div>{stockData.last_volume}</div></h4>
+        <h4>52 Week High: <div>{stockData.week_52_high}</div></h4>
+        <h4>52 Week Low: <div>{stockData.week_52_low}</div></h4>
       </div>
+    </div>
   );
 };
 
