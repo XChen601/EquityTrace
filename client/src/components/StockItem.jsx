@@ -51,14 +51,20 @@ function StockItem({ stock }) {
         <p className='description'>{stockData.description}</p>
         <h4>Current Price: <div>${stockData.ask}</div></h4>
         <h4>Price Movement: <div>{stockData.change_percentage}%</div></h4>
-        <h4>Notes: <div>{stock.notes}</div></h4>
 
         <div className='trade-info'>
           <h4>Shares Held: <div>{stock.shares}</div></h4>
           <h4>Average Bought Price: <div>${stock.averagePrice.toFixed(2)}</div></h4>
           <RealizedProfit profit={stock.profit} />
         </div>
-
+        {
+          stock.notes && (
+            <div className='notes'>
+              <h4>Notes:</h4>
+              <p>{stock.notes}</p>
+            </div>
+          )
+        }
 
         <button className='trade' onClick={onTradeClick}>Trade</button>
         <div className='item-footer'>Last Updated: {new Date(stock.createdAt).toLocaleDateString("en-US")}</div>

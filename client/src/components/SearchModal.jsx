@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 //import { addToDatabase, getUserFavorites, getUserName } from "../Firebase";
-import {  useDispatch } from "react-redux";
-import { updateUserStock } from "../features/userStocks/userStocksSlice";
+import {  useDispatch, useSelector } from "react-redux";
+import { createUserStock, updateUserStock } from "../features/userStocks/userStocksSlice";
 import "../css/SearchModal.css";
 import DetailedView from "./DetailedView";
 import {MDBModal} from 'mdb-react-ui-kit'
@@ -12,6 +12,7 @@ export default function SearchModal({
   toggleModalVisibility,
   setModalVisibility,
 }) {
+  const {userStocks} = useSelector((state) => state.userStocks)
   const [stockInfo, setStockInfo] = useState({});
   const [notes, setNotes] = useState("");
 
@@ -27,7 +28,12 @@ export default function SearchModal({
       price: 0,
     };
 
-    dispatch(updateUserStock(savedStockInfo));
+    // check if in userStocks, if not add to it, else do nothing
+    const stockExists = userStocks.find((stock) => stock.stockTicker === stockInfo.symbol)
+    if (stockExists) {
+      return;
+    }
+    dispatch(createUserStock(savedStockInfo));
   };
 
   const setNotFound = () => {

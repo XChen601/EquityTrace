@@ -103,9 +103,9 @@ const updateUserStock = asyncHandler(async (req, res) => {
 });
 
 const deleteUserStock = asyncHandler(async (req, res) => {
-  const userStock = await UserStocks.findById(req.params.id);
+  const deleteStock = await UserStocks.findById(req.params.id);
 
-  if (!userStock) {
+  if (!deleteStock) {
     res.status(404);
     throw new Error("Stock not found");
   }
@@ -116,12 +116,12 @@ const deleteUserStock = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  if (userStock.user.toString() !== req.user.id) {
+  if (deleteStock.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
 
-  await userStock.remove();
+  await deleteStock.deleteOne();
 
   res.json({ id: req.params.id });
 });

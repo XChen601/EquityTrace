@@ -49,8 +49,9 @@ const deleteUserStock = async (userStockId, token) => {
     },
   };
 
+  console.log(API_URL + userStockId, config)
   const response = await axios.delete(API_URL + userStockId, config);
-
+  console.log(response.data);
   return response.data;
 };
 
