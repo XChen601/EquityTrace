@@ -2,26 +2,14 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
-    },
-    email: {
-      type: String,
-      required: [true, "Please enter an email"],
-      unique: true,
     },
     password: {
       type: String,
       required: [true, "Please enter a password"],
     },
-    // not yet implemented
-    savedStocks: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Stock",
-      },
-    ],
   },
   {
     timestamps: true,

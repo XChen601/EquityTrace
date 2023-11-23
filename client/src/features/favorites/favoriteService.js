@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_BASE_URL + "favorites/";
+const API_URL = process.env.REACT_APP_API_BASE_URL + "/favorites/";
 
 // Create new favorite
 const createFavorite = async (favoriteData, token) => {

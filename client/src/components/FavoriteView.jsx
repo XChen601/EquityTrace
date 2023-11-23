@@ -10,17 +10,9 @@ function FavoriteView() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
-  const {favorites, isLoading, isError, message} = useSelector((state) => state.favorites)
   const {user} = useSelector((state) => state.auth)
 
-  useEffect(() => {
-    if (isError) {
-      console.log(message)
-    }
-
-    dispatch(getFavorites())
-
-  }, [user, navigate, isError, message, dispatch])
+  const favorites = ["abc", "def"]
 
 
   // check if user is logged in
@@ -29,9 +21,7 @@ function FavoriteView() {
       <h3 className='empty'>Register or login to save stocks!</h3>
     )
   }
-  if (isLoading) {
-    return <Loading />
-  }
+
   return (
     <section className='content'>
         {favorites.length > 0 ? (

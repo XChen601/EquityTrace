@@ -3,10 +3,20 @@ import { useSelector} from 'react-redux';
 import Search from '../components/Search';
 import FavoriteView from '../components/FavoriteView';
 import TradeModal from '../components/TradeModal';
+import { useState, useEffect } from 'react';
 
 function Dashboard() {
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const {user} = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+      // get user information
+    }
+  }, []);
+
 
   return (
     <div className='main-content'>

@@ -3,58 +3,26 @@ import { FaSignInAlt } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { login, reset } from '../features/auth/authSlice'
+import { login } from '../actions/authActions'
 import Loading from '../components/Loading'
 import '../css/LoginRegister.css'
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
-
-  const { email, password } = formData
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+  const { isLoading, error } = useSelector(state => state.auth);
 
-  useEffect(() => {
-    if (isError) {
-      toast.error(message)
-    }
+  const [userData, setUserData] = useState({ email: '', password: '' });
 
-    if (isSuccess || user) {
-      navigate('/')
-    }
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
 
-    dispatch(reset())
-  }, [user, isError, isSuccess, message, navigate, dispatch])
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }))
-  }
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    const userData = {
-      email,
-      password,
-    }
-
-    dispatch(login(userData))
-  }
-
-  if (isLoading) {
-    return <Loading />
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(userData));
+  };
 
   return (
     <div className='main-content'>
@@ -66,35 +34,29 @@ function Login() {
       </section>
 
       <section className='form'>
-        <form onSubmit={onSubmit}>
-          <div className='form-group'>
-            <input
-              type='email'
-              className='form-control'
-              id='email'
-              name='email'
-              value={email}
-              placeholder='Enter your email'
-              onChange={onChange}
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='password'
-              className='form-control'
-              id='password'
-              name='password'
-              value={password}
-              placeholder='Enter password'
-              onChange={onChange}
-            />
-          </div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type='text'
+            className='form-control'
+            id='username'
+            name='username'
+            value={userData.username}
+            placeholder='Enter your username'
+            onChange={handleChange}
+          />
+          <input
+            type='password'
+            className='form-control'
+            id='password'
+            name='password'
+            value={userData.password}
+            placeholder='Enter password'
+            onChange={handleChange}
+          />
 
-          <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
-              Submit
-            </button>
-          </div>
+          <button type='submit' className='btn btn-block'>
+            Submit
+          </button>
         </form>
       </section>
     </div>
