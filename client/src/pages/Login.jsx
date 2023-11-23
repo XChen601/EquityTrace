@@ -9,11 +9,11 @@ import '../css/LoginRegister.css'
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   })
 
-  const { email, password } = formData
+  const { username, password } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -45,7 +45,7 @@ function Login() {
     e.preventDefault()
 
     const userData = {
-      email,
+      username,
       password,
     }
 
@@ -69,12 +69,12 @@ function Login() {
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
-              type='email'
+              type='username'
               className='form-control'
-              id='email'
-              name='email'
-              value={email}
-              placeholder='Enter your email'
+              id='username'
+              name='username'
+              value={username}
+              placeholder='Enter your username'
               onChange={onChange}
             />
           </div>
