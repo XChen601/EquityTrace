@@ -41,7 +41,7 @@ function TradeModal() {
       shares: formValues.quantity,
       price: formValues.price,
     };
-
+    console.log('taatawtaw')
     dispatch(updateUserStock(savedStockInfo));
   }
   // if user not logged in, show nothing

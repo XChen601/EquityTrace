@@ -154,6 +154,9 @@ export const userStocksSlice = createSlice({
       .addCase(updateUserStock.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.userStocks = state.userStocks.map((stock) =>
+          stock._id === action.payload._id ? action.payload : stock
+        );
       })
       .addCase(updateUserStock.rejected, (state, action) => {
         state.isLoading = false;

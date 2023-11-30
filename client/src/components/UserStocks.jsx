@@ -35,7 +35,7 @@ function UserStocks() {
     <section className='content'>
       {userStocks.length > 0 ? (
         <div className='favorites'>
-          {userStocks.map((stock) => (
+          {[...userStocks].reverse().map((stock) => (
             <UserStockItem key={stock.id} stock={stock} />
           ))}
           <p id="totalProfit">Total Profit: ${totalProfit}</p>
